@@ -1,0 +1,8 @@
+Place your images here with these exact filenames:
+
+1. salon-hero.jpg      → Main salon / interior photo (used in Home section hero)
+2. offers-hero.jpg     → The man + woman photo shown in Offers Zone banner
+3. offer-149.jpg       → The "Hair Cut + Hair Wash + Conditioning at ₹149" poster
+4. offer-199.jpg       → The "Hair Cut + Wash + Conditioning + Trimming at ₹199" poster
+
+If you have more offer posters, let the developer know to add them to the posters-grid in index.html.
