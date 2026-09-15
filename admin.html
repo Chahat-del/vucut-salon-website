@@ -180,6 +180,21 @@
       <i class="fa-solid fa-lock"></i> Login with Netlify
     </button>
     <p class="login-note">Access is restricted to authorised admin accounts only.<br />Powered by Netlify Identity — secure &amp; free.</p>
+
+    <!-- PAT setup — only shown after Identity login if no PAT saved -->
+    <div id="patSetup" style="display:none;margin-top:28px;text-align:left;">
+      <div style="height:1px;background:rgba(155,31,193,0.2);margin-bottom:24px;"></div>
+      <p style="font-family:'Rajdhani',sans-serif;font-size:.75rem;letter-spacing:.2em;color:#aaa;text-transform:uppercase;margin-bottom:10px;">One-time Setup</p>
+      <p style="font-size:.82rem;color:#888;line-height:1.7;margin-bottom:14px;">
+        Paste your Netlify <strong style="color:#ccc">Personal Access Token</strong> to let the admin panel read form submissions.<br />
+        Get it from <a href="https://app.netlify.com/user/applications" target="_blank" style="color:#c944e8;">app.netlify.com/user/applications</a> → New access token.
+      </p>
+      <input type="password" id="patInput" placeholder="Paste your Netlify PAT here..." style="width:100%;padding:11px 14px;background:#141414;border:1px solid rgba(155,31,193,0.3);border-radius:10px;color:#fff;font-size:.88rem;font-family:'Montserrat',sans-serif;outline:none;margin-bottom:12px;" />
+      <button id="patSaveBtn" style="width:100%;padding:11px;background:linear-gradient(135deg,#9b1fc1,#c944e8);border:none;border-radius:10px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:600;letter-spacing:.1em;cursor:pointer;transition:.3s;">
+        Save &amp; Load Data
+      </button>
+      <p id="patError" style="display:none;color:#ef4444;font-size:.78rem;margin-top:10px;"></p>
+    </div>
   </div>
 </div>
 
@@ -307,9 +322,11 @@ var bFilter      = 'all';
 var eFilter      = 'all';
 var currentModal = null;
 
-// ── localStorage for statuses ──
+// ── localStorage for statuses + PAT ──
 function loadStatus() { try { statusMap = JSON.parse(localStorage.getItem('vucut_statuses') || '{}'); } catch(e) { statusMap = {}; } }
 function saveStatus() { localStorage.setItem('vucut_statuses', JSON.stringify(statusMap)); }
+function getPAT()    { return localStorage.getItem('vucut_pat') || ''; }
+function savePAT(t)  { localStorage.setItem('vucut_pat', t); }
 
 // ── Token detection ──
 function getTokenType() {
@@ -340,6 +357,7 @@ NI.on('logout', function() {
   currentUser = null;
   document.getElementById('dashboard').style.display   = 'none';
   document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('patSetup').style.display    = 'none';
 });
 
 NI.on('error', function(err) { console.error('[Identity error]', err); });
@@ -349,9 +367,33 @@ document.getElementById('loginBtn').addEventListener('click', function() { NI.op
 document.getElementById('logoutBtn').addEventListener('click', function() { NI.logout(); });
 document.getElementById('refreshBtn').addEventListener('click', fetchAll);
 
+// ── PAT save button ──
+document.getElementById('patSaveBtn').addEventListener('click', function() {
+  var val = document.getElementById('patInput').value.trim();
+  if (!val) {
+    showPatError('Please paste your Personal Access Token first.');
+    return;
+  }
+  savePAT(val);
+  showDashboard(currentUser);
+});
+
+function showPatError(msg) {
+  var el = document.getElementById('patError');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
 // ── Show dashboard ──
 function showDashboard(user) {
   currentUser = user;
+  var pat = getPAT();
+  if (!pat) {
+    // Show PAT setup prompt, stay on login screen
+    document.getElementById('loginBtn').style.display  = 'none';
+    document.getElementById('patSetup').style.display  = 'block';
+    return;
+  }
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('dashboard').style.display   = 'block';
   document.getElementById('adminUser').textContent     = user.email;
@@ -364,13 +406,26 @@ async function fetchAll() {
   setLoading('b', true);
   setLoading('e', true);
   try {
-    var token   = currentUser.token.access_token;
+    var pat     = getPAT();
     var siteId  = location.hostname;
     var base    = 'https://api.netlify.com/api/v1';
-    var headers = { Authorization: 'Bearer ' + token };
+    var headers = { Authorization: 'Bearer ' + pat };
 
     var fRes = await fetch(base + '/sites/' + siteId + '/forms', { headers: headers });
-    if (!fRes.ok) throw new Error('Forms API ' + fRes.status + ': ' + await fRes.text());
+    if (!fRes.ok) {
+      var errText = await fRes.text();
+      // If PAT is invalid/expired, show setup again
+      if (fRes.status === 401) {
+        localStorage.removeItem('vucut_pat');
+        document.getElementById('loginBtn').style.display  = 'none';
+        document.getElementById('patSetup').style.display  = 'block';
+        document.getElementById('dashboard').style.display = 'none';
+        document.getElementById('loginScreen').style.display = 'flex';
+        showPatError('Token rejected (401). Please paste a new Personal Access Token.');
+        return;
+      }
+      throw new Error('Forms API ' + fRes.status + ': ' + errText);
+    }
     var forms = await fRes.json();
     console.log('[vuCut] forms:', forms.map(function(f){ return f.name; }));
 
@@ -384,7 +439,10 @@ async function fetchAll() {
     if (eForm) {
       var er = await fetch(base + '/forms/' + eForm.id + '/submissions?per_page=500', { headers: headers });
       enquiries = er.ok ? await er.json() : [];
-    } else { enquiries = []; }
+    } else {
+      console.warn('[vuCut] No enquiry form yet — submit one test enquiry on the live site first.');
+      enquiries = [];
+    }
 
   } catch(err) {
     console.error('[vuCut] fetchAll failed:', err);
