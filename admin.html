@@ -603,41 +603,71 @@ function showDashboard(user) {
 async function fetchAll() {
   setLoading('b', true);
   setLoading('e', true);
+
   try {
     const token  = currentUser.token.access_token;
-    const siteId = location.hostname === 'localhost'
-      ? 'YOUR_NETLIFY_SITE_ID'
-      : location.hostname;
 
-    const res   = await fetch(`https://api.netlify.com/api/v1/sites/${siteId}/forms`,
-      { headers: { Authorization: `Bearer ${token}` } });
+    // Netlify Forms API — site identified by hostname (works on Netlify-deployed sites)
+    const siteId = location.hostname;
+    const apiBase = 'https://api.netlify.com/api/v1';
+    const headers = { Authorization: `Bearer ${token}` };
 
-    if (!res.ok) throw new Error(res.status);
-    const forms = await res.json();
+    // ── Step 1: get all forms for this site ──
+    const formsRes = await fetch(`${apiBase}/sites/${siteId}/forms`, { headers });
 
-    // Fetch bookings
+    if (!formsRes.ok) {
+      const txt = await formsRes.text();
+      throw new Error(`Forms list failed (${formsRes.status}): ${txt}`);
+    }
+
+    const forms = await formsRes.json();
+    console.log('[vuCut Admin] Forms found:', forms.map(f => f.name));
+
+    // ── Step 2: fetch bookings ──
     const bForm = forms.find(f => f.name === 'booking');
     if (bForm) {
       const r = await fetch(
-        `https://api.netlify.com/api/v1/forms/${bForm.id}/submissions?per_page=500`,
-        { headers: { Authorization: `Bearer ${token}` } });
-      bookings = r.ok ? await r.json() : [];
-    } else { bookings = []; }
+        `${apiBase}/forms/${bForm.id}/submissions?per_page=500`,
+        { headers }
+      );
+      if (r.ok) {
+        bookings = await r.json();
+      } else {
+        console.warn('[vuCut Admin] Bookings fetch failed:', r.status, await r.text());
+        bookings = [];
+      }
+    } else {
+      console.warn('[vuCut Admin] No "booking" form found on this site yet.');
+      bookings = [];
+    }
 
-    // Fetch enquiries
+    // ── Step 3: fetch enquiries ──
     const eForm = forms.find(f => f.name === 'enquiry');
     if (eForm) {
       const r = await fetch(
-        `https://api.netlify.com/api/v1/forms/${eForm.id}/submissions?per_page=500`,
-        { headers: { Authorization: `Bearer ${token}` } });
-      enquiries = r.ok ? await r.json() : [];
-    } else { enquiries = []; }
+        `${apiBase}/forms/${eForm.id}/submissions?per_page=500`,
+        { headers }
+      );
+      if (r.ok) {
+        enquiries = await r.json();
+      } else {
+        console.warn('[vuCut Admin] Enquiries fetch failed:', r.status, await r.text());
+        enquiries = [];
+      }
+    } else {
+      console.warn('[vuCut Admin] No "enquiry" form found on this site yet. Submit a test enquiry first.');
+      enquiries = [];
+    }
 
   } catch(err) {
-    console.error(err);
+    console.error('[vuCut Admin] fetchAll error:', err);
+    showFetchError(err.message);
   }
+
   renderBookings();
   renderEnquiries();
+  updateBadges();
+}
   updateBadges();
 }
 
@@ -891,6 +921,22 @@ document.getElementById('refreshBtn').addEventListener('click', fetchAll);
 function setLoading(prefix, on) {
   document.getElementById(`${prefix}Loading`).style.display   = on ? 'block' : 'none';
   document.getElementById(`${prefix}TableWrap`).style.display = on ? 'none'  : 'block';
+}
+
+function showFetchError(msg) {
+  // Show the error in both table areas so it's visible
+  ['b','e'].forEach(prefix => {
+    setLoading(prefix, false);
+    const emptyEl = document.getElementById(`${prefix}Empty`);
+    const tableEl = document.getElementById(`${prefix}Table`);
+    if (emptyEl) {
+      emptyEl.style.display = 'block';
+      emptyEl.querySelector('p').textContent =
+        'Could not load data. Open browser console (F12) for details. ' +
+        'Make sure this site is deployed on Netlify and you are logged in as an admin.';
+    }
+    if (tableEl) tableEl.style.display = 'none';
+  });
 }
 function fmtDate(iso) {
   if (!iso) return '—';
