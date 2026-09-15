@@ -1,7 +1,8 @@
 # ── Netlify configuration for vuCut website ──
 
 [build]
-  publish = "."          # root folder = what gets deployed
+  publish   = "."
+  functions = "netlify/functions"   # tells Netlify where to find functions
 
 # Redirect /admin to admin.html cleanly
 [[redirects]]
@@ -9,7 +10,7 @@
   to     = "/admin.html"
   status = 200
 
-# Protect admin page — only Netlify Identity users can access it
+# Security headers for admin page
 [[headers]]
   for = "/admin.html"
   [headers.values]

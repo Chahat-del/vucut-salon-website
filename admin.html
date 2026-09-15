@@ -17,79 +17,44 @@
     }
     body { background:var(--bg); color:var(--white); font-family:var(--font); min-height:100vh; }
     a { text-decoration:none; color:inherit; }
-    ::-webkit-scrollbar { width:6px; }
-    ::-webkit-scrollbar-track { background:var(--bg); }
-    ::-webkit-scrollbar-thumb { background:var(--purple); border-radius:3px; }
+    ::-webkit-scrollbar{width:6px;} ::-webkit-scrollbar-track{background:var(--bg);} ::-webkit-scrollbar-thumb{background:var(--purple);border-radius:3px;}
 
     /* LOGIN */
-    #loginScreen {
-      min-height:100vh; display:flex; align-items:center; justify-content:center;
-      background:radial-gradient(ellipse at center,rgba(155,31,193,0.1) 0%,transparent 70%);
-    }
-    .login-box {
-      background:var(--card); border:1px solid var(--border); border-radius:20px;
-      padding:50px 44px; width:100%; max-width:420px; text-align:center;
-      box-shadow:0 0 60px rgba(155,31,193,0.15);
-    }
+    #loginScreen { min-height:100vh; display:flex; align-items:center; justify-content:center; background:radial-gradient(ellipse at center,rgba(155,31,193,0.1) 0%,transparent 70%); }
+    .login-box { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:50px 44px; width:100%; max-width:420px; text-align:center; box-shadow:0 0 60px rgba(155,31,193,0.15); }
     .login-logo { font-family:var(--display); font-size:2.8rem; font-weight:700; margin-bottom:6px; }
     .login-logo .lc { color:var(--purplebr); }
     .login-sub { font-family:var(--display); font-size:.75rem; letter-spacing:.25em; color:var(--grey); text-transform:uppercase; margin-bottom:32px; }
     .login-box h2 { font-family:var(--display); font-size:1.4rem; letter-spacing:.08em; margin-bottom:28px; color:var(--greylt); }
-    .login-btn {
-      display:inline-flex; align-items:center; gap:10px;
-      padding:14px 36px; background:linear-gradient(135deg,var(--purple),var(--purplebr));
-      border:none; border-radius:50px; color:#fff; font-family:var(--display);
-      font-size:1rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
-      cursor:pointer; transition:.3s; box-shadow:0 0 25px var(--pglow);
-    }
+    .login-btn { display:inline-flex; align-items:center; gap:10px; padding:14px 36px; background:linear-gradient(135deg,var(--purple),var(--purplebr)); border:none; border-radius:50px; color:#fff; font-family:var(--display); font-size:1rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; transition:.3s; box-shadow:0 0 25px var(--pglow); }
     .login-btn:hover { transform:translateY(-3px); box-shadow:0 10px 35px rgba(155,31,193,.5); }
     .login-note { margin-top:20px; font-size:.78rem; color:var(--grey); line-height:1.6; }
 
     /* DASHBOARD */
     #dashboard { display:none; }
     .admin-layout { display:flex; min-height:100vh; }
-    .sidebar {
-      width:240px; background:var(--card); border-right:1px solid var(--border);
-      display:flex; flex-direction:column; padding:28px 0;
-      position:fixed; top:0; left:0; height:100vh; z-index:100;
-    }
+    .sidebar { width:240px; background:var(--card); border-right:1px solid var(--border); display:flex; flex-direction:column; padding:28px 0; position:fixed; top:0; left:0; height:100vh; z-index:100; }
     .sb-logo { font-family:var(--display); font-size:1.8rem; font-weight:700; padding:0 28px 24px; border-bottom:1px solid var(--border); }
     .sb-logo .lc { color:var(--purplebr); }
     .sb-label { font-size:.62rem; letter-spacing:.22em; color:var(--grey); text-transform:uppercase; padding:20px 28px 8px; font-family:var(--display); }
     .sb-nav { list-style:none; }
-    .sb-nav li a {
-      display:flex; align-items:center; gap:12px; padding:11px 28px;
-      color:var(--grey); font-family:var(--display); font-size:.95rem;
-      letter-spacing:.05em; transition:.25s; border-left:3px solid transparent; cursor:pointer;
-    }
+    .sb-nav li a { display:flex; align-items:center; gap:12px; padding:11px 28px; color:var(--grey); font-family:var(--display); font-size:.95rem; letter-spacing:.05em; transition:.25s; border-left:3px solid transparent; cursor:pointer; }
     .sb-nav li a:hover, .sb-nav li a.active { color:var(--white); background:rgba(155,31,193,.08); border-left-color:var(--purplebr); }
     .sb-nav li a i { width:18px; color:var(--purplebr); }
     .sb-badge { margin-left:auto; background:var(--purplebr); color:#fff; font-size:.6rem; font-weight:700; padding:2px 7px; border-radius:10px; font-family:var(--display); }
     .sb-bottom { margin-top:auto; padding:20px 28px; border-top:1px solid var(--border); }
-    #logoutBtn {
-      display:flex; align-items:center; gap:10px; background:none;
-      border:1px solid var(--border); color:var(--grey); padding:9px 18px;
-      border-radius:8px; cursor:pointer; font-family:var(--display); font-size:.85rem; letter-spacing:.06em; transition:.25s; width:100%;
-    }
+    #logoutBtn { display:flex; align-items:center; gap:10px; background:none; border:1px solid var(--border); color:var(--grey); padding:9px 18px; border-radius:8px; cursor:pointer; font-family:var(--display); font-size:.85rem; letter-spacing:.06em; transition:.25s; width:100%; }
     #logoutBtn:hover { border-color:var(--red); color:var(--red); }
     .main-content { margin-left:240px; flex:1; padding:36px 40px; }
     .topbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:32px; }
     .topbar-title { font-family:var(--display); font-size:1.6rem; font-weight:700; letter-spacing:.06em; }
     .topbar-title span { color:var(--purplebr); }
     .topbar-right { display:flex; align-items:center; gap:14px; }
-    .refresh-btn {
-      background:none; border:1px solid var(--border); color:var(--grey);
-      padding:8px 16px; border-radius:8px; cursor:pointer; font-family:var(--display);
-      font-size:.82rem; letter-spacing:.08em; display:flex; align-items:center; gap:7px; transition:.25s;
-    }
+    .refresh-btn { background:none; border:1px solid var(--border); color:var(--grey); padding:8px 16px; border-radius:8px; cursor:pointer; font-family:var(--display); font-size:.82rem; letter-spacing:.08em; display:flex; align-items:center; gap:7px; transition:.25s; }
     .refresh-btn:hover { border-color:var(--purplebr); color:var(--white); }
     #adminUser { font-size:.82rem; color:var(--grey); font-family:var(--display); }
     .page-tabs { display:flex; margin-bottom:28px; border:1px solid var(--border); border-radius:12px; overflow:hidden; width:fit-content; }
-    .page-tab {
-      padding:10px 28px; background:none; border:none; color:var(--grey);
-      font-family:var(--display); font-size:.88rem; letter-spacing:.1em;
-      text-transform:uppercase; cursor:pointer; transition:.25s; display:flex; align-items:center; gap:8px;
-    }
+    .page-tab { padding:10px 28px; background:none; border:none; color:var(--grey); font-family:var(--display); font-size:.88rem; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; transition:.25s; display:flex; align-items:center; gap:8px; }
     .page-tab+.page-tab { border-left:1px solid var(--border); }
     .page-tab.active { background:var(--purple); color:var(--white); }
     .page-tab:hover:not(.active) { background:rgba(155,31,193,.08); color:var(--white); }
@@ -105,18 +70,11 @@
     .table-toolbar { display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:18px; }
     .search-wrap { position:relative; flex:1; max-width:300px; }
     .search-wrap i { position:absolute; left:13px; top:50%; transform:translateY(-50%); color:var(--grey); font-size:.83rem; }
-    .search-wrap input {
-      width:100%; padding:9px 14px 9px 36px; background:var(--card); border:1px solid var(--border);
-      border-radius:8px; color:var(--white); font-family:var(--font); font-size:.85rem; outline:none; transition:.25s;
-    }
+    .search-wrap input { width:100%; padding:9px 14px 9px 36px; background:var(--card); border:1px solid var(--border); border-radius:8px; color:var(--white); font-family:var(--font); font-size:.85rem; outline:none; transition:.25s; }
     .search-wrap input:focus { border-color:var(--purplebr); }
     .search-wrap input::placeholder { color:#555; }
     .filter-group { display:flex; gap:8px; flex-wrap:wrap; }
-    .filter-btn {
-      background:none; border:1px solid var(--border); color:var(--grey);
-      padding:6px 15px; border-radius:30px; font-family:var(--display);
-      font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; transition:.25s;
-    }
+    .filter-btn { background:none; border:1px solid var(--border); color:var(--grey); padding:6px 15px; border-radius:30px; font-family:var(--display); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; transition:.25s; }
     .filter-btn:hover { border-color:var(--purplebr); color:var(--white); }
     .filter-btn.active { background:var(--purple); border-color:var(--purple); color:var(--white); }
     .table-wrap { background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
@@ -180,21 +138,6 @@
       <i class="fa-solid fa-lock"></i> Login with Netlify
     </button>
     <p class="login-note">Access is restricted to authorised admin accounts only.<br />Powered by Netlify Identity — secure &amp; free.</p>
-
-    <!-- PAT setup — only shown after Identity login if no PAT saved -->
-    <div id="patSetup" style="display:none;margin-top:28px;text-align:left;">
-      <div style="height:1px;background:rgba(155,31,193,0.2);margin-bottom:24px;"></div>
-      <p style="font-family:'Rajdhani',sans-serif;font-size:.75rem;letter-spacing:.2em;color:#aaa;text-transform:uppercase;margin-bottom:10px;">One-time Setup</p>
-      <p style="font-size:.82rem;color:#888;line-height:1.7;margin-bottom:14px;">
-        Paste your Netlify <strong style="color:#ccc">Personal Access Token</strong> to let the admin panel read form submissions.<br />
-        Get it from <a href="https://app.netlify.com/user/applications" target="_blank" style="color:#c944e8;">app.netlify.com/user/applications</a> → New access token.
-      </p>
-      <input type="password" id="patInput" placeholder="Paste your Netlify PAT here..." style="width:100%;padding:11px 14px;background:#141414;border:1px solid rgba(155,31,193,0.3);border-radius:10px;color:#fff;font-size:.88rem;font-family:'Montserrat',sans-serif;outline:none;margin-bottom:12px;" />
-      <button id="patSaveBtn" style="width:100%;padding:11px;background:linear-gradient(135deg,#9b1fc1,#c944e8);border:none;border-radius:10px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:600;letter-spacing:.1em;cursor:pointer;transition:.3s;">
-        Save &amp; Load Data
-      </button>
-      <p id="patError" style="display:none;color:#ef4444;font-size:.78rem;margin-top:10px;"></p>
-    </div>
   </div>
 </div>
 
@@ -304,14 +247,15 @@
 
 <div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span id="toastMsg">Done!</span></div>
 
-<!-- Widget MUST load before our script -->
+<!-- Identity widget loads first -->
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
-// ══════════════════════════════
-//  vuCut Admin Panel
-// ══════════════════════════════
+// ══════════════════════════════════════════════════
+//  vuCut Admin — Identity login + Netlify Function
+//  PAT lives in server env var, never in browser
+// ══════════════════════════════════════════════════
 
-var NI = window.netlifyIdentity;  // alias
+var NI = window.netlifyIdentity;
 
 var currentUser  = null;
 var bookings     = [];
@@ -322,13 +266,11 @@ var bFilter      = 'all';
 var eFilter      = 'all';
 var currentModal = null;
 
-// ── localStorage for statuses + PAT ──
+// Status persisted locally (no sensitive data)
 function loadStatus() { try { statusMap = JSON.parse(localStorage.getItem('vucut_statuses') || '{}'); } catch(e) { statusMap = {}; } }
 function saveStatus() { localStorage.setItem('vucut_statuses', JSON.stringify(statusMap)); }
-function getPAT()    { return localStorage.getItem('vucut_pat') || ''; }
-function savePAT(t)  { localStorage.setItem('vucut_pat', t); }
 
-// ── Token detection ──
+// Token type detection (for invite / recovery links)
 function getTokenType() {
   var h = window.location.hash;
   if (!h) return null;
@@ -357,43 +299,16 @@ NI.on('logout', function() {
   currentUser = null;
   document.getElementById('dashboard').style.display   = 'none';
   document.getElementById('loginScreen').style.display = 'flex';
-  document.getElementById('patSetup').style.display    = 'none';
 });
 
-NI.on('error', function(err) { console.error('[Identity error]', err); });
+NI.on('error', function(err) { console.error('[Identity]', err); });
 
-// ── Buttons ──
-document.getElementById('loginBtn').addEventListener('click', function() { NI.open('login'); });
+document.getElementById('loginBtn').addEventListener('click',  function() { NI.open('login'); });
 document.getElementById('logoutBtn').addEventListener('click', function() { NI.logout(); });
 document.getElementById('refreshBtn').addEventListener('click', fetchAll);
 
-// ── PAT save button ──
-document.getElementById('patSaveBtn').addEventListener('click', function() {
-  var val = document.getElementById('patInput').value.trim();
-  if (!val) {
-    showPatError('Please paste your Personal Access Token first.');
-    return;
-  }
-  savePAT(val);
-  showDashboard(currentUser);
-});
-
-function showPatError(msg) {
-  var el = document.getElementById('patError');
-  el.textContent = msg;
-  el.style.display = 'block';
-}
-
-// ── Show dashboard ──
 function showDashboard(user) {
   currentUser = user;
-  var pat = getPAT();
-  if (!pat) {
-    // Show PAT setup prompt, stay on login screen
-    document.getElementById('loginBtn').style.display  = 'none';
-    document.getElementById('patSetup').style.display  = 'block';
-    return;
-  }
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('dashboard').style.display   = 'block';
   document.getElementById('adminUser').textContent     = user.email;
@@ -401,52 +316,41 @@ function showDashboard(user) {
   fetchAll();
 }
 
-// ── Fetch submissions ──
+// ════════════════════════════════════════════
+//  fetchAll — calls our Netlify Function
+//  The function uses the server-side PAT.
+//  We only send the Identity JWT for auth.
+// ════════════════════════════════════════════
 async function fetchAll() {
   setLoading('b', true);
   setLoading('e', true);
   try {
-    var pat     = getPAT();
-    var siteId  = location.hostname;
-    var base    = 'https://api.netlify.com/api/v1';
-    var headers = { Authorization: 'Bearer ' + pat };
+    // Get a fresh Identity JWT (auto-refreshed by the widget)
+    var jwt = currentUser.token.access_token;
+    var hdrs = { Authorization: 'Bearer ' + jwt };
+    var fn   = '/.netlify/functions/get-submissions';
 
-    var fRes = await fetch(base + '/sites/' + siteId + '/forms', { headers: headers });
-    if (!fRes.ok) {
-      var errText = await fRes.text();
-      // If PAT is invalid/expired, show setup again
-      if (fRes.status === 401) {
-        localStorage.removeItem('vucut_pat');
-        document.getElementById('loginBtn').style.display  = 'none';
-        document.getElementById('patSetup').style.display  = 'block';
-        document.getElementById('dashboard').style.display = 'none';
-        document.getElementById('loginScreen').style.display = 'flex';
-        showPatError('Token rejected (401). Please paste a new Personal Access Token.');
-        return;
-      }
-      throw new Error('Forms API ' + fRes.status + ': ' + errText);
+    var [bRes, eRes] = await Promise.all([
+      fetch(fn + '?form=booking',  { headers: hdrs }),
+      fetch(fn + '?form=enquiry',  { headers: hdrs }),
+    ]);
+
+    if (!bRes.ok) {
+      var msg = await bRes.text();
+      throw new Error('Bookings: ' + bRes.status + ' ' + msg);
     }
-    var forms = await fRes.json();
-    console.log('[vuCut] forms:', forms.map(function(f){ return f.name; }));
-
-    var bForm = forms.find(function(f){ return f.name === 'booking'; });
-    if (bForm) {
-      var br = await fetch(base + '/forms/' + bForm.id + '/submissions?per_page=500', { headers: headers });
-      bookings = br.ok ? await br.json() : [];
-    } else { bookings = []; }
-
-    var eForm = forms.find(function(f){ return f.name === 'enquiry'; });
-    if (eForm) {
-      var er = await fetch(base + '/forms/' + eForm.id + '/submissions?per_page=500', { headers: headers });
-      enquiries = er.ok ? await er.json() : [];
-    } else {
-      console.warn('[vuCut] No enquiry form yet — submit one test enquiry on the live site first.');
-      enquiries = [];
+    if (!eRes.ok) {
+      var msg2 = await eRes.text();
+      throw new Error('Enquiries: ' + eRes.status + ' ' + msg2);
     }
+
+    bookings  = await bRes.json();
+    enquiries = await eRes.json();
 
   } catch(err) {
-    console.error('[vuCut] fetchAll failed:', err);
+    console.error('[vuCut admin] fetchAll:', err);
     showFetchError(err.message);
+    return;
   }
   renderBookings();
   renderEnquiries();
@@ -461,11 +365,10 @@ function switchPage(page) {
     document.getElementById('tab-'  + p).classList.toggle('active', p === page);
     document.getElementById('sb-'   + p).classList.toggle('active', p === page);
   });
-  var titles = { bookings: 'Booking <span>Requests</span>', enquiries: 'Enquiry <span>Messages</span>' };
+  var titles = { bookings:'Booking <span>Requests</span>', enquiries:'Enquiry <span>Messages</span>' };
   document.getElementById('topbarTitle').innerHTML = titles[page];
 }
 
-// ── Badges ──
 function updateBadges() {
   document.getElementById('sbBadgeBookings').textContent   = bookings.length;
   document.getElementById('sbBadgeEnquiries').textContent  = enquiries.length;
@@ -473,14 +376,14 @@ function updateBadges() {
   document.getElementById('tabCountEnquiries').textContent = enquiries.length;
 }
 
-// ════════════ BOOKINGS ════════════
+// ── Render Bookings ──
 function renderBookings() {
   setLoading('b', false);
-  var q = document.getElementById('bSearch').value.toLowerCase();
+  var q     = document.getElementById('bSearch').value.toLowerCase();
   var today = new Date().toISOString().split('T')[0];
   var bnew=0, btoday=0, bconf=0;
   bookings.forEach(function(s) {
-    var st = statusMap[s.id] || 'new';
+    var st = statusMap[s.id]||'new';
     if (st==='new') bnew++;
     if (st==='confirmed') bconf++;
     if ((s.created_at||'').split('T')[0]===today) btoday++;
@@ -493,32 +396,25 @@ function renderBookings() {
   var filtered = bookings.filter(function(s) {
     var d = s.data||{};
     var match = !q || [d.name,d.phone,d.service].join(' ').toLowerCase().indexOf(q)!==-1;
-    var st = statusMap[s.id]||'new';
-    return match && (bFilter==='all' || st===bFilter);
+    return match && (bFilter==='all' || (statusMap[s.id]||'new')===bFilter);
   });
-
   var tbody = document.getElementById('bBody');
   tbody.innerHTML = '';
   if (!filtered.length) {
     document.getElementById('bEmpty').style.display = 'block';
-    document.getElementById('bTable').style.display = 'none';
-    return;
+    document.getElementById('bTable').style.display = 'none'; return;
   }
   document.getElementById('bEmpty').style.display = 'none';
   document.getElementById('bTable').style.display = 'table';
-
-  filtered.forEach(function(s, i) {
-    var d = s.data||{}, st = statusMap[s.id]||'new';
-    var wa = d.phone ? 'https://wa.me/' + d.phone.replace(/\D/g,'') : '#';
+  filtered.forEach(function(s,i) {
+    var d=s.data||{}, st=statusMap[s.id]||'new';
+    var wa = d.phone ? 'https://wa.me/'+d.phone.replace(/\D/g,'') : '#';
     var tr = document.createElement('tr');
     tr.innerHTML =
       '<td style="color:#555;font-size:.77rem">'+(i+1)+'</td>'+
       '<td class="name-cell">'+esc(d.name||'—')+'</td>'+
       '<td class="phone-cell"><a href="'+wa+'" target="_blank"><i class="fa-brands fa-whatsapp"></i>'+esc(d.phone||'—')+'</a></td>'+
-      '<td>'+esc(d.service||'—')+'</td>'+
-      '<td>'+esc(d.date||'—')+'</td>'+
-      '<td>'+esc(d.time||'—')+'</td>'+
-      '<td>'+esc(d.gender||'—')+'</td>'+
+      '<td>'+esc(d.service||'—')+'</td><td>'+esc(d.date||'—')+'</td><td>'+esc(d.time||'—')+'</td><td>'+esc(d.gender||'—')+'</td>'+
       '<td><span class="badge badge-'+st+'">'+st+'</span></td>'+
       '<td style="font-size:.77rem;color:#555">'+fmtDate(s.created_at)+'</td>'+
       '<td><div class="action-btns">'+
@@ -528,22 +424,21 @@ function renderBookings() {
     tbody.appendChild(tr);
   });
 }
-
 document.getElementById('bSearch').addEventListener('input', renderBookings);
 document.getElementById('bFilters').addEventListener('click', function(e) {
-  var btn = e.target.closest('.filter-btn'); if (!btn) return;
+  var btn=e.target.closest('.filter-btn'); if(!btn) return;
   document.querySelectorAll('#bFilters .filter-btn').forEach(function(b){b.classList.remove('active');});
-  btn.classList.add('active'); bFilter = btn.dataset.status; renderBookings();
+  btn.classList.add('active'); bFilter=btn.dataset.status; renderBookings();
 });
 
-// ════════════ ENQUIRIES ════════════
+// ── Render Enquiries ──
 function renderEnquiries() {
   setLoading('e', false);
-  var q = document.getElementById('eSearch').value.toLowerCase();
+  var q     = document.getElementById('eSearch').value.toLowerCase();
   var today = new Date().toISOString().split('T')[0];
   var enew=0, etoday=0, ereplied=0;
   enquiries.forEach(function(s) {
-    var st = statusMap[s.id]||'new';
+    var st=statusMap[s.id]||'new';
     if (st==='new') enew++;
     if (st==='replied') ereplied++;
     if ((s.created_at||'').split('T')[0]===today) etoday++;
@@ -554,25 +449,21 @@ function renderEnquiries() {
   document.getElementById('eStatReplied').textContent = ereplied;
 
   var filtered = enquiries.filter(function(s) {
-    var d = s.data||{};
-    var match = !q || [d.name,d.phone,d.topic,d.message].join(' ').toLowerCase().indexOf(q)!==-1;
-    var st = statusMap[s.id]||'new';
-    return match && (eFilter==='all' || st===eFilter);
+    var d=s.data||{};
+    var match=!q||[d.name,d.phone,d.topic,d.message].join(' ').toLowerCase().indexOf(q)!==-1;
+    return match && (eFilter==='all' || (statusMap[s.id]||'new')===eFilter);
   });
-
   var tbody = document.getElementById('eBody');
   tbody.innerHTML = '';
   if (!filtered.length) {
     document.getElementById('eEmpty').style.display = 'block';
-    document.getElementById('eTable').style.display = 'none';
-    return;
+    document.getElementById('eTable').style.display = 'none'; return;
   }
   document.getElementById('eEmpty').style.display = 'none';
   document.getElementById('eTable').style.display = 'table';
-
-  filtered.forEach(function(s, i) {
-    var d = s.data||{}, st = statusMap[s.id]||'new';
-    var wa = d.phone ? 'https://wa.me/' + d.phone.replace(/\D/g,'') : '#';
+  filtered.forEach(function(s,i) {
+    var d=s.data||{}, st=statusMap[s.id]||'new';
+    var wa = d.phone ? 'https://wa.me/'+d.phone.replace(/\D/g,'') : '#';
     var mailBtn = d.email ? '<button class="act-btn" onclick="window.open(\'mailto:'+esc(d.email)+'\',\'_blank\')"><i class="fa-solid fa-envelope"></i></button>' : '';
     var tr = document.createElement('tr');
     tr.innerHTML =
@@ -592,43 +483,37 @@ function renderEnquiries() {
     tbody.appendChild(tr);
   });
 }
-
 document.getElementById('eSearch').addEventListener('input', renderEnquiries);
 document.getElementById('eFilters').addEventListener('click', function(e) {
-  var btn = e.target.closest('.filter-btn'); if (!btn) return;
+  var btn=e.target.closest('.filter-btn'); if(!btn) return;
   document.querySelectorAll('#eFilters .filter-btn').forEach(function(b){b.classList.remove('active');});
-  btn.classList.add('active'); eFilter = btn.dataset.status; renderEnquiries();
+  btn.classList.add('active'); eFilter=btn.dataset.status; renderEnquiries();
 });
 
-// ════════════ MODAL ════════════
+// ── Modal ──
 function openModal(id, type) {
   var pool = type==='booking' ? bookings : enquiries;
-  var s = pool.find(function(x){ return x.id===id; });
+  var s = pool.find(function(x){return x.id===id;});
   if (!s) return;
-  currentModal = { id:id, type:type };
+  currentModal = {id:id, type:type};
   var d = s.data||{};
   var tag = document.getElementById('modalTag');
   tag.textContent = type==='booking' ? 'Booking' : 'Enquiry';
-  tag.className = 'modal-type-tag ' + (type==='booking' ? 'tag-booking' : 'tag-enquiry');
-  document.getElementById('modalTitle').textContent = (d.name||'Details') + ' – ' + (type==='booking' ? 'Booking' : 'Enquiry');
-
+  tag.className   = 'modal-type-tag '+(type==='booking'?'tag-booking':'tag-enquiry');
+  document.getElementById('modalTitle').textContent = (d.name||'Details')+' – '+(type==='booking'?'Booking':'Enquiry');
   var fields = type==='booking'
     ? [['Name',d.name],['Phone',d.phone],['Service',d.service],['Date',d.date],['Time',d.time],['For',d.gender],['Submitted',new Date(s.created_at).toLocaleString('en-IN')],['Notes',d.message,true]]
     : [['Name',d.name],['Phone',d.phone],['Email',d.email],['Topic',d.topic],['Submitted',new Date(s.created_at).toLocaleString('en-IN')],['Message',d.message,true]];
-
   document.getElementById('modalFields').innerHTML = fields.map(function(f){
     return '<div class="modal-field '+(f[2]?'full':'')+'"><label>'+f[0]+'</label><p>'+esc(f[1]||'—')+'</p></div>';
   }).join('');
-
   var opts = type==='booking' ? ['new','confirmed','done','cancelled'] : ['new','replied','done'];
   var cur  = statusMap[id]||'new';
   document.getElementById('modalStatus').innerHTML = opts.map(function(o){
     return '<option value="'+o+'"'+(o===cur?' selected':'')+'>'+o+'</option>';
   }).join('');
-
   document.getElementById('modalOverlay').classList.add('open');
 }
-
 document.getElementById('modalClose').addEventListener('click', function(){ document.getElementById('modalOverlay').classList.remove('open'); });
 document.getElementById('modalOverlay').addEventListener('click', function(e){ if(e.target===this) this.classList.remove('open'); });
 document.getElementById('saveStatus').addEventListener('click', function() {
@@ -641,7 +526,7 @@ document.getElementById('saveStatus').addEventListener('click', function() {
   showToast('Status updated');
 });
 
-// ════════════ HELPERS ════════════
+// ── Helpers ──
 function setLoading(p, on) {
   document.getElementById(p+'Loading').style.display   = on ? 'block' : 'none';
   document.getElementById(p+'TableWrap').style.display = on ? 'none'  : 'block';
@@ -650,7 +535,7 @@ function showFetchError(msg) {
   ['b','e'].forEach(function(p) {
     setLoading(p, false);
     document.getElementById(p+'Empty').style.display = 'block';
-    document.getElementById(p+'Empty').querySelector('p').textContent = 'Could not load data. Open F12 console for details. Error: ' + msg;
+    document.getElementById(p+'Empty').querySelector('p').textContent = 'Error: '+msg;
     document.getElementById(p+'Table').style.display = 'none';
   });
 }
@@ -664,7 +549,7 @@ function esc(s) {
 function showToast(msg, isErr) {
   var el = document.getElementById('toast');
   document.getElementById('toastMsg').textContent = msg;
-  el.className = 'toast' + (isErr ? ' error' : '');
+  el.className = 'toast'+(isErr?' error':'');
   el.classList.add('show');
   setTimeout(function(){ el.classList.remove('show'); }, 3000);
 }
