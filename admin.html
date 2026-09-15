@@ -536,17 +536,59 @@ function loadStatus() {
 }
 function saveStatus() { localStorage.setItem('vucut_statuses', JSON.stringify(statusMap)); }
 
+// ── Detect token type from URL hash ──
+function getTokenType() {
+  var hash = window.location.hash;
+  if (!hash) return null;
+  if (hash.indexOf('invite_token=')       !== -1) return 'invite';
+  if (hash.indexOf('recovery_token=')     !== -1) return 'recovery';
+  if (hash.indexOf('confirmation_token=') !== -1) return 'confirmation';
+  return null;
+}
+
 // ── Auth ──
-netlifyIdentity.on('init',   u => u && showDashboard(u));
-netlifyIdentity.on('login',  u => { netlifyIdentity.close(); showDashboard(u); });
-netlifyIdentity.on('logout', () => {
+netlifyIdentity.on('init', function(user) {
+  var tokenType = getTokenType();
+
+  if (tokenType === 'invite') {
+    // Widget will auto-open the "set your password" form when it sees invite_token
+    netlifyIdentity.open();
+    return;
+  }
+  if (tokenType === 'recovery') {
+    netlifyIdentity.open();
+    return;
+  }
+  if (tokenType === 'confirmation') {
+    // Email confirmation — widget handles it internally; wait for login event
+    return;
+  }
+
+  // Normal page load — show dashboard if already logged in
+  if (user) showDashboard(user);
+});
+
+netlifyIdentity.on('login', function(user) {
+  netlifyIdentity.close();
+  // Clean the token hash from the URL without reloading
+  if (window.history && window.history.replaceState) {
+    window.history.replaceState(null, '', window.location.pathname);
+  }
+  showDashboard(user);
+});
+
+netlifyIdentity.on('logout', function() {
   currentUser = null;
   document.getElementById('dashboard').style.display   = 'none';
   document.getElementById('loginScreen').style.display = 'flex';
 });
 
-document.getElementById('loginBtn').addEventListener('click',  () => netlifyIdentity.open('login'));
-document.getElementById('logoutBtn').addEventListener('click', () => netlifyIdentity.logout());
+netlifyIdentity.on('error', function(err) {
+  console.error('Netlify Identity error:', err);
+});
+
+document.getElementById('loginBtn').addEventListener('click',  function() { netlifyIdentity.open('login'); });
+document.getElementById('logoutBtn').addEventListener('click', function() { netlifyIdentity.logout(); });
 
 function showDashboard(user) {
   currentUser = user;

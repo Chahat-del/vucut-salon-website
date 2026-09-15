@@ -7,6 +7,28 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Dancing+Script:wght@600;700&family=Rajdhani:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!--
+    Netlify Identity — loaded on every page so invitation / recovery
+    email links (which always land on the root URL) are intercepted here
+    and handed off to admin.html before the page renders.
+  -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    // Run synchronously so the redirect happens before any paint
+    (function () {
+      var hash = window.location.hash;
+      // Netlify Identity puts tokens in the URL hash as key=value pairs
+      if (hash && (
+        hash.indexOf('invite_token=')      !== -1 ||
+        hash.indexOf('recovery_token=')    !== -1 ||
+        hash.indexOf('confirmation_token=') !== -1
+      )) {
+        // Forward the entire hash to admin.html so the widget can consume it
+        window.location.replace('/admin.html' + hash);
+      }
+    })();
+  </script>
 </head>
 <body>
 
