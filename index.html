@@ -354,52 +354,233 @@
       <div class="divider-line center"></div>
     </div>
 
-    <!-- Social Cards -->
-    <div class="social-cards">
+    <!-- QR Code Block -->
+    <div class="qr-block">
 
-      <a href="https://www.instagram.com/vucut.in" target="_blank" class="social-card instagram">
-        <div class="social-icon"><i class="fa-brands fa-instagram"></i></div>
-        <div class="social-info">
-          <h3>Instagram</h3>
-          <p>@vucut.in</p>
-          <span class="follow-btn">Follow Us</span>
+      <!-- Instagram QR -->
+      <a href="https://www.instagram.com/vucut_salon?igsh=OHRvaWpmbnBhNjV5" target="_blank" class="qr-card qr-instagram">
+        <div class="qr-border-wrap insta-border">
+          <div class="qr-img-wrap">
+            <img
+              src="images/qr-instagram.png"
+              alt="Instagram QR Code – @vucut_salon"
+            />
+          </div>
         </div>
-        <div class="social-glow insta-glow"></div>
+        <div class="qr-label">
+          <span class="qr-action">CLICK</span>
+          <span class="qr-text insta-text">TO FOLLOW US!</span>
+          <span class="qr-handle">@vucut_salon</span>
+        </div>
       </a>
 
-      <a href="https://www.facebook.com/vucut.in" target="_blank" class="social-card facebook">
-        <div class="social-icon"><i class="fa-brands fa-facebook-f"></i></div>
-        <div class="social-info">
-          <h3>Facebook</h3>
-          <p>vuCut – The Family Salon</p>
-          <span class="follow-btn">Like Page</span>
+      <!-- Location QR -->
+      <a href="https://maps.app.goo.gl/2xwywD2YWMu4MM9r9" target="_blank" class="qr-card qr-location">
+        <div class="qr-border-wrap google-border">
+          <div class="qr-img-wrap">
+            <img
+              src="images/qr-location.png"
+              alt="Location QR Code – vuCut Salon"
+            />
+          </div>
         </div>
-        <div class="social-glow fb-glow"></div>
-      </a>
-
-      <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="social-card whatsapp">
-        <div class="social-icon"><i class="fa-brands fa-whatsapp"></i></div>
-        <div class="social-info">
-          <h3>WhatsApp</h3>
-          <p>Book Appointment</p>
-          <span class="follow-btn">Chat Now</span>
+        <div class="qr-label">
+          <span class="qr-action">SCAN</span>
+          <span class="qr-text location-text">FOR LOCATION</span>
         </div>
-        <div class="social-glow wa-glow"></div>
-      </a>
-
-      <a href="https://www.youtube.com/@vucut" target="_blank" class="social-card youtube">
-        <div class="social-icon"><i class="fa-brands fa-youtube"></i></div>
-        <div class="social-info">
-          <h3>YouTube</h3>
-          <p>vuCut Official</p>
-          <span class="follow-btn">Subscribe</span>
-        </div>
-        <div class="social-glow yt-glow"></div>
       </a>
 
     </div>
 
-    <!-- Contact / Location -->
+    <!-- ── Booking Form ── -->
+    <div class="booking-section" id="booking">
+      <div class="booking-header">
+        <p class="section-label">BOOK AN APPOINTMENT</p>
+        <h2 class="section-heading">Reserve Your <span class="accent">Slot</span></h2>
+        <div class="divider-line center"></div>
+      </div>
+
+      <!-- success state (hidden by default) -->
+      <div class="form-success" id="formSuccess">
+        <i class="fa-solid fa-circle-check"></i>
+        <h3>Booking Received!</h3>
+        <p>We'll confirm your appointment via WhatsApp / call shortly.</p>
+      </div>
+
+      <form
+        name="booking"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        class="booking-form"
+        id="bookingForm"
+        novalidate
+      >
+        <!-- Netlify hidden fields -->
+        <input type="hidden" name="form-name" value="booking" />
+        <p class="hidden-honey"><label>Don't fill this: <input name="bot-field" /></label></p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Full Name <span class="req">*</span></label>
+            <input type="text" id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number <span class="req">*</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="service">Service <span class="req">*</span></label>
+            <select id="service" name="service" required>
+              <option value="" disabled selected>Select a service</option>
+              <optgroup label="── Gents ──">
+                <option>Hair Cut</option>
+                <option>Hair Cut + Wash + Conditioning</option>
+                <option>Beard Trim / Shaping</option>
+                <option>Royal Shave</option>
+              </optgroup>
+              <optgroup label="── Hair Treatments ──">
+                <option>Keratin Treatment</option>
+                <option>Botox Treatment</option>
+                <option>Hair Color / Highlights</option>
+                <option>Balayage</option>
+              </optgroup>
+              <optgroup label="── Ladies ──">
+                <option>Ladies Hair Cut</option>
+                <option>Hair Spa</option>
+                <option>Smoothening</option>
+              </optgroup>
+              <optgroup label="── Beauty &amp; Makeover ──">
+                <option>Facial</option>
+                <option>Cleanup / Bleach</option>
+                <option>Party Makeup</option>
+                <option>Bridal Makeup</option>
+                <option>Manicure / Pedicure</option>
+              </optgroup>
+              <option>Other / Not sure</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="date">Preferred Date <span class="req">*</span></label>
+            <input type="date" id="date" name="date" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="time">Preferred Time</label>
+            <select id="time" name="time">
+              <option value="" disabled selected>Select time slot</option>
+              <option>9:00 AM – 10:00 AM</option>
+              <option>10:00 AM – 11:00 AM</option>
+              <option>11:00 AM – 12:00 PM</option>
+              <option>12:00 PM – 1:00 PM</option>
+              <option>2:00 PM – 3:00 PM</option>
+              <option>3:00 PM – 4:00 PM</option>
+              <option>4:00 PM – 5:00 PM</option>
+              <option>5:00 PM – 6:00 PM</option>
+              <option>6:00 PM – 7:00 PM</option>
+              <option>7:00 PM – 8:00 PM</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="gender">For</label>
+            <select id="gender" name="gender">
+              <option value="" disabled selected>Gents / Ladies / Kids</option>
+              <option>Gents</option>
+              <option>Ladies</option>
+              <option>Kids</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="message">Additional Notes</label>
+          <textarea id="message" name="message" rows="3" placeholder="Any special requests or questions..."></textarea>
+        </div>
+
+        <button type="submit" class="form-submit">
+          <i class="fa-solid fa-calendar-check"></i>
+          Book Appointment
+        </button>
+      </form>
+    </div>
+
+    <!-- ── Enquiry Form ── -->
+    <div class="booking-section enquiry-section" id="enquiry">
+      <div class="booking-header">
+        <p class="section-label">GOT A QUESTION?</p>
+        <h2 class="section-heading">Send an <span class="accent">Enquiry</span></h2>
+        <p class="section-sub">We'll get back to you within a few hours</p>
+        <div class="divider-line center"></div>
+      </div>
+
+      <div class="form-success" id="enquirySuccess">
+        <i class="fa-solid fa-circle-check"></i>
+        <h3>Enquiry Sent!</h3>
+        <p>Thanks for reaching out. We'll reply shortly.</p>
+      </div>
+
+      <form
+        name="enquiry"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field-enq"
+        class="booking-form"
+        id="enquiryForm"
+        novalidate
+      >
+        <input type="hidden" name="form-name" value="enquiry" />
+        <p class="hidden-honey"><label>Don't fill: <input name="bot-field-enq" /></label></p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="enq-name">Full Name <span class="req">*</span></label>
+            <input type="text" id="enq-name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label for="enq-phone">Phone Number <span class="req">*</span></label>
+            <input type="tel" id="enq-phone" name="phone" placeholder="+91 XXXXX XXXXX" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="enq-topic">Topic <span class="req">*</span></label>
+            <select id="enq-topic" name="topic" required>
+              <option value="" disabled selected>What is your enquiry about?</option>
+              <option>Service Pricing</option>
+              <option>Franchise / Partnership</option>
+              <option>Bridal Package</option>
+              <option>Group Booking</option>
+              <option>Products Used</option>
+              <option>Working Hours &amp; Location</option>
+              <option>Feedback / Complaint</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="enq-email">Email <span class="enq-optional">(optional)</span></label>
+            <input type="email" id="enq-email" name="email" placeholder="your@email.com" />
+          </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="enq-message">Your Message <span class="req">*</span></label>
+          <textarea id="enq-message" name="message" rows="4" placeholder="Write your question or message here..." required></textarea>
+        </div>
+
+        <button type="submit" class="form-submit enq-submit">
+          <i class="fa-solid fa-paper-plane"></i>
+          Send Enquiry
+        </button>
+      </form>
+    </div>
+
+    <!-- Contact Strip -->
     <div class="contact-strip">
       <div class="contact-item">
         <i class="fa-solid fa-location-dot"></i>
@@ -444,5 +625,65 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    // ── Booking form — AJAX submit so user stays on page ──
+    const bookingForm = document.getElementById('bookingForm');
+    const formSuccess = document.getElementById('formSuccess');
+
+    if (bookingForm) {
+      const dateInput = document.getElementById('date');
+      if (dateInput) dateInput.min = new Date().toISOString().split('T')[0];
+
+      bookingForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = bookingForm.querySelector('.form-submit');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+        try {
+          const data = new FormData(bookingForm);
+          await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(data).toString(),
+          });
+          bookingForm.style.display = 'none';
+          formSuccess.style.display = 'flex';
+          formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } catch {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-solid fa-calendar-check"></i> Book Appointment';
+          alert('Something went wrong. Please try again or call us directly.');
+        }
+      });
+    }
+
+    // ── Enquiry form — AJAX submit ──
+    const enquiryForm    = document.getElementById('enquiryForm');
+    const enquirySuccess = document.getElementById('enquirySuccess');
+
+    if (enquiryForm) {
+      enquiryForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = enquiryForm.querySelector('.form-submit');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+        try {
+          const data = new FormData(enquiryForm);
+          await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(data).toString(),
+          });
+          enquiryForm.style.display = 'none';
+          enquirySuccess.style.display = 'flex';
+          enquirySuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } catch {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Enquiry';
+          alert('Something went wrong. Please try again or call us directly.');
+        }
+      });
+    }
+  </script>
 </body>
 </html>

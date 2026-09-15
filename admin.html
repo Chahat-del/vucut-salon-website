@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vuCut Admin Panel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --bg:       #000;
+      --bg2:      #0a0a0a;
+      --card:     #0f0f0f;
+      --card2:    #141414;
+      --purple:   #9b1fc1;
+      --purplebr: #c944e8;
+      --pglow:    rgba(155,31,193,0.35);
+      --border:   rgba(155,31,193,0.25);
+      --white:    #fff;
+      --grey:     #aaa;
+      --greylt:   #ccc;
+      --green:    #22c55e;
+      --yellow:   #eab308;
+      --red:      #ef4444;
+      --blue:     #3b82f6;
+      --font:    'Montserrat', sans-serif;
+      --display: 'Rajdhani', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background:var(--bg); color:var(--white); font-family:var(--font); min-height:100vh; }
+    a { text-decoration:none; color:inherit; }
+    ::-webkit-scrollbar { width:6px; }
+    ::-webkit-scrollbar-track { background:var(--bg); }
+    ::-webkit-scrollbar-thumb { background:var(--purple); border-radius:3px; }
+
+    /* ══ LOGIN ══ */
+    #loginScreen {
+      min-height:100vh; display:flex; align-items:center; justify-content:center;
+      background:radial-gradient(ellipse at center, rgba(155,31,193,0.1) 0%, transparent 70%);
+    }
+    .login-box {
+      background:var(--card); border:1px solid var(--border); border-radius:20px;
+      padding:50px 44px; width:100%; max-width:420px; text-align:center;
+      box-shadow:0 0 60px rgba(155,31,193,0.15);
+    }
+    .login-logo { font-family:var(--display); font-size:2.8rem; font-weight:700; margin-bottom:6px; }
+    .login-logo .lc { color:var(--purplebr); }
+    .login-sub {
+      font-family:var(--display); font-size:0.75rem; letter-spacing:0.25em;
+      color:var(--grey); text-transform:uppercase; margin-bottom:32px;
+    }
+    .login-box h2 { font-family:var(--display); font-size:1.4rem; letter-spacing:0.08em; margin-bottom:28px; color:var(--greylt); }
+    .login-btn {
+      display:inline-flex; align-items:center; gap:10px;
+      padding:14px 36px; background:linear-gradient(135deg,var(--purple),var(--purplebr));
+      border:none; border-radius:50px; color:#fff; font-family:var(--display);
+      font-size:1rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;
+      cursor:pointer; transition:0.3s; box-shadow:0 0 25px var(--pglow);
+    }
+    .login-btn:hover { transform:translateY(-3px); box-shadow:0 10px 35px rgba(155,31,193,0.5); }
+    .login-note { margin-top:20px; font-size:0.78rem; color:var(--grey); line-height:1.6; }
+
+    /* ══ DASHBOARD ══ */
+    #dashboard { display:none; }
+    .admin-layout { display:flex; min-height:100vh; }
+
+    /* Sidebar */
+    .sidebar {
+      width:240px; background:var(--card); border-right:1px solid var(--border);
+      display:flex; flex-direction:column; padding:28px 0;
+      position:fixed; top:0; left:0; height:100vh; z-index:100;
+    }
+    .sb-logo { font-family:var(--display); font-size:1.8rem; font-weight:700; padding:0 28px 24px; border-bottom:1px solid var(--border); }
+    .sb-logo .lc { color:var(--purplebr); }
+    .sb-label { font-size:0.62rem; letter-spacing:0.22em; color:var(--grey); text-transform:uppercase; padding:20px 28px 8px; font-family:var(--display); }
+    .sb-nav { list-style:none; }
+    .sb-nav li a {
+      display:flex; align-items:center; gap:12px; padding:11px 28px;
+      color:var(--grey); font-family:var(--display); font-size:0.95rem;
+      letter-spacing:0.05em; transition:0.25s; border-left:3px solid transparent; cursor:pointer;
+    }
+    .sb-nav li a:hover, .sb-nav li a.active {
+      color:var(--white); background:rgba(155,31,193,0.08); border-left-color:var(--purplebr);
+    }
+    .sb-nav li a i { width:18px; color:var(--purplebr); }
+    /* badge on sidebar nav */
+    .sb-badge {
+      margin-left:auto; background:var(--purplebr); color:#fff;
+      font-size:0.6rem; font-weight:700; padding:2px 7px;
+      border-radius:10px; font-family:var(--display);
+    }
+    .sb-bottom { margin-top:auto; padding:20px 28px; border-top:1px solid var(--border); }
+    #logoutBtn {
+      display:flex; align-items:center; gap:10px; background:none;
+      border:1px solid var(--border); color:var(--grey); padding:9px 18px;
+      border-radius:8px; cursor:pointer; font-family:var(--display);
+      font-size:0.85rem; letter-spacing:0.06em; transition:0.25s; width:100%;
+    }
+    #logoutBtn:hover { border-color:var(--red); color:var(--red); }
+
+    /* Main */
+    .main-content { margin-left:240px; flex:1; padding:36px 40px; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:32px; }
+    .topbar-title { font-family:var(--display); font-size:1.6rem; font-weight:700; letter-spacing:0.06em; }
+    .topbar-title span { color:var(--purplebr); }
+    .topbar-right { display:flex; align-items:center; gap:14px; }
+    .refresh-btn {
+      background:none; border:1px solid var(--border); color:var(--grey);
+      padding:8px 16px; border-radius:8px; cursor:pointer; font-family:var(--display);
+      font-size:0.82rem; letter-spacing:0.08em; display:flex; align-items:center; gap:7px; transition:0.25s;
+    }
+    .refresh-btn:hover { border-color:var(--purplebr); color:var(--white); }
+    #adminUser { font-size:0.82rem; color:var(--grey); font-family:var(--display); }
+
+    /* ── Page tabs (Bookings / Enquiries) ── */
+    .page-tabs {
+      display:flex; gap:0; margin-bottom:28px;
+      border:1px solid var(--border); border-radius:12px; overflow:hidden;
+      width:fit-content;
+    }
+    .page-tab {
+      padding:10px 28px; background:none; border:none; color:var(--grey);
+      font-family:var(--display); font-size:0.88rem; letter-spacing:0.1em;
+      text-transform:uppercase; cursor:pointer; transition:0.25s;
+      display:flex; align-items:center; gap:8px;
+    }
+    .page-tab + .page-tab { border-left:1px solid var(--border); }
+    .page-tab.active { background:var(--purple); color:var(--white); }
+    .page-tab:hover:not(.active) { background:rgba(155,31,193,0.08); color:var(--white); }
+    .tab-count {
+      background:rgba(255,255,255,0.12); padding:1px 8px;
+      border-radius:10px; font-size:0.7rem;
+    }
+    .page-tab.active .tab-count { background:rgba(255,255,255,0.2); }
+
+    /* Stat Cards */
+    .stats-row {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+      gap:16px; margin-bottom:28px;
+    }
+    .stat-card {
+      background:var(--card); border:1px solid var(--border); border-radius:14px;
+      padding:20px 22px; display:flex; flex-direction:column; gap:8px; transition:0.3s;
+    }
+    .stat-card:hover { border-color:var(--purplebr); box-shadow:0 0 20px var(--pglow); }
+    .stat-label { font-family:var(--display); font-size:0.68rem; letter-spacing:0.2em; color:var(--grey); text-transform:uppercase; }
+    .stat-value { font-family:var(--display); font-size:2rem; font-weight:700; line-height:1; }
+    .stat-icon  { font-size:1.1rem; color:var(--purplebr); align-self:flex-end; }
+    .sv-purple { color:var(--purplebr); }
+    .sv-green  { color:var(--green); }
+    .sv-yellow { color:var(--yellow); }
+    .sv-blue   { color:var(--blue); }
+
+    /* Toolbar */
+    .table-toolbar {
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; flex-wrap:wrap; margin-bottom:18px;
+    }
+    .search-wrap { position:relative; flex:1; max-width:300px; }
+    .search-wrap i { position:absolute; left:13px; top:50%; transform:translateY(-50%); color:var(--grey); font-size:0.83rem; }
+    .search-wrap input {
+      width:100%; padding:9px 14px 9px 36px;
+      background:var(--card); border:1px solid var(--border); border-radius:8px;
+      color:var(--white); font-family:var(--font); font-size:0.85rem; outline:none; transition:0.25s;
+    }
+    .search-wrap input:focus { border-color:var(--purplebr); }
+    .search-wrap input::placeholder { color:#555; }
+    .filter-group { display:flex; gap:8px; flex-wrap:wrap; }
+    .filter-btn {
+      background:none; border:1px solid var(--border); color:var(--grey);
+      padding:6px 15px; border-radius:30px; font-family:var(--display);
+      font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; transition:0.25s;
+    }
+    .filter-btn:hover { border-color:var(--purplebr); color:var(--white); }
+    .filter-btn.active { background:var(--purple); border-color:var(--purple); color:var(--white); }
+
+    /* Table */
+    .table-wrap { background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
+    table { width:100%; border-collapse:collapse; font-size:0.875rem; }
+    thead { background:var(--card2); }
+    thead th {
+      padding:13px 18px; text-align:left; font-family:var(--display);
+      font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--grey); border-bottom:1px solid var(--border); white-space:nowrap;
+    }
+    tbody tr { border-bottom:1px solid rgba(255,255,255,0.04); transition:background 0.2s; }
+    tbody tr:last-child { border-bottom:none; }
+    tbody tr:hover { background:rgba(155,31,193,0.05); }
+    tbody td { padding:13px 18px; color:var(--greylt); vertical-align:middle; }
+    td.name-cell  { color:var(--white); font-weight:500; }
+    td.phone-cell a { color:var(--purplebr); display:flex; align-items:center; gap:6px; }
+    td.phone-cell a:hover { text-decoration:underline; }
+    td.msg-cell { max-width:220px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--grey); font-size:0.82rem; }
+
+    /* Badges */
+    .badge {
+      display:inline-block; padding:3px 11px; border-radius:20px;
+      font-family:var(--display); font-size:0.66rem; font-weight:600;
+      letter-spacing:0.1em; text-transform:uppercase; border:none;
+    }
+    .badge-new       { background:rgba(34,197,94,0.12);  color:var(--green);   border:1px solid rgba(34,197,94,0.3); }
+    .badge-confirmed { background:rgba(155,31,193,0.12); color:var(--purplebr);border:1px solid var(--border); }
+    .badge-done      { background:rgba(255,255,255,0.05);color:var(--grey);    border:1px solid rgba(255,255,255,0.1); }
+    .badge-cancelled { background:rgba(239,68,68,0.1);   color:var(--red);     border:1px solid rgba(239,68,68,0.25); }
+    .badge-replied   { background:rgba(59,130,246,0.12); color:var(--blue);    border:1px solid rgba(59,130,246,0.3); }
+
+    /* Action buttons */
+    .action-btns { display:flex; gap:7px; }
+    .act-btn {
+      background:none; border:1px solid var(--border); color:var(--grey);
+      width:29px; height:29px; border-radius:6px;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; font-size:0.73rem; transition:0.2s;
+    }
+    .act-btn:hover            { border-color:var(--purplebr); color:var(--purplebr); }
+    .act-btn.danger:hover     { border-color:var(--red); color:var(--red); }
+
+    /* Empty / Loading */
+    .table-state { padding:60px 20px; text-align:center; color:var(--grey); }
+    .table-state i { font-size:2.5rem; color:var(--border); margin-bottom:14px; display:block; }
+    .table-state p { font-family:var(--display); letter-spacing:0.08em; }
+
+    /* Modal */
+    .modal-overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,0.82);
+      backdrop-filter:blur(6px); z-index:500;
+      display:none; align-items:center; justify-content:center; padding:20px;
+    }
+    .modal-overlay.open { display:flex; }
+    .modal {
+      background:var(--card); border:1px solid var(--border); border-radius:20px;
+      padding:36px; max-width:540px; width:100%; position:relative;
+      box-shadow:0 0 60px rgba(155,31,193,0.2);
+    }
+    .modal-type-tag {
+      display:inline-block; margin-bottom:10px; padding:3px 12px;
+      border-radius:20px; font-family:var(--display); font-size:0.65rem;
+      letter-spacing:0.15em; text-transform:uppercase;
+    }
+    .tag-booking  { background:rgba(155,31,193,0.15); color:var(--purplebr); border:1px solid var(--border); }
+    .tag-enquiry  { background:rgba(59,130,246,0.12); color:var(--blue);     border:1px solid rgba(59,130,246,0.3); }
+    .modal-close {
+      position:absolute; top:16px; right:16px; background:none;
+      border:1px solid var(--border); color:var(--grey); width:32px; height:32px;
+      border-radius:50%; cursor:pointer; font-size:0.9rem;
+      display:flex; align-items:center; justify-content:center; transition:0.2s;
+    }
+    .modal-close:hover { border-color:var(--red); color:var(--red); }
+    .modal h3 { font-family:var(--display); font-size:1.3rem; letter-spacing:0.08em; margin-bottom:20px; padding-right:30px; }
+    .modal-fields { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .modal-field label {
+      font-family:var(--display); font-size:0.63rem; letter-spacing:0.2em;
+      color:var(--grey); text-transform:uppercase; display:block; margin-bottom:4px;
+    }
+    .modal-field p {
+      font-size:0.9rem; color:var(--greylt); background:var(--card2);
+      padding:9px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.06);
+      word-break:break-word; line-height:1.6;
+    }
+    .modal-field.full { grid-column:1/-1; }
+    .modal-status-row { margin-top:18px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .modal-status-row label { font-family:var(--display); font-size:0.7rem; letter-spacing:0.2em; color:var(--grey); text-transform:uppercase; }
+    .status-select {
+      background:var(--card2); border:1px solid var(--border); color:var(--white);
+      padding:7px 14px; border-radius:8px; font-family:var(--display);
+      font-size:0.85rem; cursor:pointer; outline:none;
+    }
+    .save-btn {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 22px; background:linear-gradient(135deg,var(--purple),var(--purplebr));
+      border:none; border-radius:50px; color:#fff; font-family:var(--display);
+      font-size:0.82rem; font-weight:600; letter-spacing:0.1em; cursor:pointer; transition:0.3s;
+    }
+    .save-btn:hover { transform:translateY(-2px); }
+
+    /* Toast */
+    .toast {
+      position:fixed; bottom:28px; right:28px; background:var(--card);
+      border:1px solid var(--border); border-radius:10px; padding:12px 20px;
+      font-family:var(--display); font-size:0.88rem; letter-spacing:0.05em;
+      display:flex; align-items:center; gap:10px; box-shadow:0 8px 30px rgba(0,0,0,0.4);
+      transform:translateY(80px); opacity:0; transition:0.35s cubic-bezier(.4,0,.2,1); z-index:999;
+    }
+    .toast.show { transform:translateY(0); opacity:1; }
+    .toast i { color:var(--green); }
+    .toast.error i { color:var(--red); }
+
+    /* Responsive */
+    @media (max-width:900px) {
+      .sidebar { display:none; }
+      .main-content { margin-left:0; padding:24px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ LOGIN ══ -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">vu<span class="lc">C</span>ut</div>
+    <p class="login-sub">The Family Salon</p>
+    <h2>Admin Panel</h2>
+    <button class="login-btn" id="loginBtn">
+      <i class="fa-solid fa-lock"></i> Login with Netlify
+    </button>
+    <p class="login-note">
+      Access is restricted to authorised admin accounts only.<br />
+      Powered by Netlify Identity — secure &amp; free.
+    </p>
+  </div>
+</div>
+
+<!-- ══ DASHBOARD ══ -->
+<div id="dashboard">
+  <div class="admin-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sb-logo">vu<span class="lc">C</span>ut</div>
+      <p class="sb-label">Submissions</p>
+      <ul class="sb-nav">
+        <li>
+          <a href="#" id="sb-bookings" class="active" onclick="switchPage('bookings');return false;">
+            <i class="fa-solid fa-calendar-check"></i> Bookings
+            <span class="sb-badge" id="sbBadgeBookings">0</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" id="sb-enquiries" onclick="switchPage('enquiries');return false;">
+            <i class="fa-solid fa-envelope"></i> Enquiries
+            <span class="sb-badge" id="sbBadgeEnquiries">0</span>
+          </a>
+        </li>
+      </ul>
+      <p class="sb-label">Site</p>
+      <ul class="sb-nav">
+        <li><a href="index.html" target="_blank"><i class="fa-solid fa-globe"></i> View Website</a></li>
+      </ul>
+      <div class="sb-bottom">
+        <button id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main-content">
+
+      <!-- Topbar -->
+      <div class="topbar">
+        <h1 class="topbar-title" id="topbarTitle">Booking <span>Requests</span></h1>
+        <div class="topbar-right">
+          <span id="adminUser"></span>
+          <button class="refresh-btn" id="refreshBtn">
+            <i class="fa-solid fa-rotate-right"></i> Refresh
+          </button>
+        </div>
+      </div>
+
+      <!-- Page tabs -->
+      <div class="page-tabs">
+        <button class="page-tab active" id="tab-bookings" onclick="switchPage('bookings')">
+          <i class="fa-solid fa-calendar-check"></i> Bookings
+          <span class="tab-count" id="tabCountBookings">0</span>
+        </button>
+        <button class="page-tab" id="tab-enquiries" onclick="switchPage('enquiries')">
+          <i class="fa-solid fa-envelope"></i> Enquiries
+          <span class="tab-count" id="tabCountEnquiries">0</span>
+        </button>
+      </div>
+
+      <!-- ── BOOKINGS PAGE ── -->
+      <div id="page-bookings">
+        <div class="stats-row">
+          <div class="stat-card">
+            <span class="stat-label">Total</span>
+            <span class="stat-value sv-purple" id="bStatTotal">—</span>
+            <i class="fa-solid fa-calendar-days stat-icon"></i>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">New</span>
+            <span class="stat-value sv-green" id="bStatNew">—</span>
+            <i class="fa-solid fa-circle-dot stat-icon"></i>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Today</span>
+            <span class="stat-value sv-yellow" id="bStatToday">—</span>
+            <i class="fa-solid fa-clock stat-icon"></i>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Confirmed</span>
+            <span class="stat-value sv-purple" id="bStatConfirmed">—</span>
+            <i class="fa-solid fa-circle-check stat-icon"></i>
+          </div>
+        </div>
+
+        <div class="table-toolbar">
+          <div class="search-wrap">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="bSearch" placeholder="Name, phone, service..." />
+          </div>
+          <div class="filter-group" id="bFilters">
+            <button class="filter-btn active" data-status="all">All</button>
+            <button class="filter-btn" data-status="new">New</button>
+            <button class="filter-btn" data-status="confirmed">Confirmed</button>
+            <button class="filter-btn" data-status="done">Done</button>
+            <button class="filter-btn" data-status="cancelled">Cancelled</button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <div class="table-state" id="bLoading"><i class="fa-solid fa-spinner fa-spin"></i><p>Loading...</p></div>
+          <div id="bTableWrap" style="display:none">
+            <table id="bTable">
+              <thead>
+                <tr>
+                  <th>#</th><th>Name</th><th>Phone</th><th>Service</th>
+                  <th>Date</th><th>Time</th><th>For</th>
+                  <th>Status</th><th>Received</th><th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="bBody"></tbody>
+            </table>
+            <div class="table-state" id="bEmpty" style="display:none">
+              <i class="fa-regular fa-calendar-xmark"></i><p>No bookings found</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ENQUIRIES PAGE ── -->
+      <div id="page-enquiries" style="display:none">
+        <div class="stats-row">
+          <div class="stat-card">
+            <span class="stat-label">Total</span>
+            <span class="stat-value sv-blue" id="eStatTotal">—</span>
+            <i class="fa-solid fa-envelope stat-icon"></i>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">New</span>
+            <span class="stat-value sv-green" id="eStatNew">—</span>
+            <i class="fa-solid fa-circle-dot stat-icon"></i>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Today</span>
+            <span class="stat-value sv-yellow" id="eStatToday">—</span>
+            <i class="fa-solid fa-clock stat-icon"></i>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Replied</span>
+            <span class="stat-value sv-blue" id="eStatReplied">—</span>
+            <i class="fa-solid fa-reply stat-icon"></i>
+          </div>
+        </div>
+
+        <div class="table-toolbar">
+          <div class="search-wrap">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="eSearch" placeholder="Name, phone, topic..." />
+          </div>
+          <div class="filter-group" id="eFilters">
+            <button class="filter-btn active" data-status="all">All</button>
+            <button class="filter-btn" data-status="new">New</button>
+            <button class="filter-btn" data-status="replied">Replied</button>
+            <button class="filter-btn" data-status="done">Done</button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <div class="table-state" id="eLoading"><i class="fa-solid fa-spinner fa-spin"></i><p>Loading...</p></div>
+          <div id="eTableWrap" style="display:none">
+            <table id="eTable">
+              <thead>
+                <tr>
+                  <th>#</th><th>Name</th><th>Phone</th><th>Email</th>
+                  <th>Topic</th><th>Message</th>
+                  <th>Status</th><th>Received</th><th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="eBody"></tbody>
+            </table>
+            <div class="table-state" id="eEmpty" style="display:none">
+              <i class="fa-regular fa-envelope-open"></i><p>No enquiries found</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" id="modalClose"><i class="fa-solid fa-xmark"></i></button>
+    <span class="modal-type-tag" id="modalTag">Booking</span>
+    <h3 id="modalTitle">Details</h3>
+    <div class="modal-fields" id="modalFields"></div>
+    <div class="modal-status-row">
+      <label>Status:</label>
+      <select class="status-select" id="modalStatus"></select>
+      <button class="save-btn" id="saveStatus">
+        <i class="fa-solid fa-floppy-disk"></i> Save
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toastMsg">Done!</span>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════
+//  vuCut Admin — Netlify Identity + Forms API
+//  Two form types: 'booking' and 'enquiry'
+// ══════════════════════════════════════════════════
+
+const netlifyIdentity = window.netlifyIdentity;
+let currentUser  = null;
+let bookings     = [];
+let enquiries    = [];
+let statusMap    = {};      // { id: status }
+let activePage   = 'bookings';
+let bFilter      = 'all';
+let eFilter      = 'all';
+let currentModal = null;    // { id, type }
+
+// ── Persist statuses in localStorage ──
+function loadStatus() {
+  try { statusMap = JSON.parse(localStorage.getItem('vucut_statuses') || '{}'); }
+  catch { statusMap = {}; }
+}
+function saveStatus() { localStorage.setItem('vucut_statuses', JSON.stringify(statusMap)); }
+
+// ── Auth ──
+netlifyIdentity.on('init',   u => u && showDashboard(u));
+netlifyIdentity.on('login',  u => { netlifyIdentity.close(); showDashboard(u); });
+netlifyIdentity.on('logout', () => {
+  currentUser = null;
+  document.getElementById('dashboard').style.display   = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+});
+
+document.getElementById('loginBtn').addEventListener('click',  () => netlifyIdentity.open('login'));
+document.getElementById('logoutBtn').addEventListener('click', () => netlifyIdentity.logout());
+
+function showDashboard(user) {
+  currentUser = user;
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('dashboard').style.display   = 'block';
+  document.getElementById('adminUser').textContent     = user.email;
+  loadStatus();
+  fetchAll();
+}
+
+// ── Fetch both forms ──
+async function fetchAll() {
+  setLoading('b', true);
+  setLoading('e', true);
+  try {
+    const token  = currentUser.token.access_token;
+    const siteId = location.hostname === 'localhost'
+      ? 'YOUR_NETLIFY_SITE_ID'
+      : location.hostname;
+
+    const res   = await fetch(`https://api.netlify.com/api/v1/sites/${siteId}/forms`,
+      { headers: { Authorization: `Bearer ${token}` } });
+
+    if (!res.ok) throw new Error(res.status);
+    const forms = await res.json();
+
+    // Fetch bookings
+    const bForm = forms.find(f => f.name === 'booking');
+    if (bForm) {
+      const r = await fetch(
+        `https://api.netlify.com/api/v1/forms/${bForm.id}/submissions?per_page=500`,
+        { headers: { Authorization: `Bearer ${token}` } });
+      bookings = r.ok ? await r.json() : [];
+    } else { bookings = []; }
+
+    // Fetch enquiries
+    const eForm = forms.find(f => f.name === 'enquiry');
+    if (eForm) {
+      const r = await fetch(
+        `https://api.netlify.com/api/v1/forms/${eForm.id}/submissions?per_page=500`,
+        { headers: { Authorization: `Bearer ${token}` } });
+      enquiries = r.ok ? await r.json() : [];
+    } else { enquiries = []; }
+
+  } catch(err) {
+    console.error(err);
+  }
+  renderBookings();
+  renderEnquiries();
+  updateBadges();
+}
+
+// ── Page switching ──
+function switchPage(page) {
+  activePage = page;
+  ['bookings','enquiries'].forEach(p => {
+    document.getElementById(`page-${p}`).style.display   = p === page ? 'block' : 'none';
+    document.getElementById(`tab-${p}`).classList.toggle('active', p === page);
+    document.getElementById(`sb-${p}`).classList.toggle('active',  p === page);
+  });
+  const titles = { bookings: 'Booking <span>Requests</span>', enquiries: 'Enquiry <span>Messages</span>' };
+  document.getElementById('topbarTitle').innerHTML = titles[page];
+}
+
+// ── Sidebar badges ──
+function updateBadges() {
+  const bNew = bookings.filter(s  => (statusMap[s.id] || 'new') === 'new').length;
+  const eNew = enquiries.filter(s => (statusMap[s.id] || 'new') === 'new').length;
+  document.getElementById('sbBadgeBookings').textContent  = bookings.length;
+  document.getElementById('sbBadgeEnquiries').textContent = enquiries.length;
+  document.getElementById('tabCountBookings').textContent  = bookings.length;
+  document.getElementById('tabCountEnquiries').textContent = enquiries.length;
+}
+
+// ════════════════════════
+//  BOOKINGS
+// ════════════════════════
+function renderBookings() {
+  setLoading('b', false);
+  const q = document.getElementById('bSearch').value.toLowerCase();
+  const filtered = bookings.filter(s => {
+    const d = s.data || {};
+    const ok = !q ||
+      (d.name    || '').toLowerCase().includes(q) ||
+      (d.phone   || '').toLowerCase().includes(q) ||
+      (d.service || '').toLowerCase().includes(q);
+    const st = statusMap[s.id] || 'new';
+    return ok && (bFilter === 'all' || st === bFilter);
+  });
+
+  const today = new Date().toISOString().split('T')[0];
+  let total = bookings.length, bnew = 0, btoday = 0, bconf = 0;
+  bookings.forEach(s => {
+    const st = statusMap[s.id] || 'new';
+    if (st === 'new') bnew++;
+    if (st === 'confirmed') bconf++;
+    if ((s.created_at||'').split('T')[0] === today) btoday++;
+  });
+  document.getElementById('bStatTotal').textContent     = total;
+  document.getElementById('bStatNew').textContent       = bnew;
+  document.getElementById('bStatToday').textContent     = btoday;
+  document.getElementById('bStatConfirmed').textContent = bconf;
+
+  const tbody = document.getElementById('bBody');
+  tbody.innerHTML = '';
+  if (!filtered.length) {
+    document.getElementById('bEmpty').style.display = 'block';
+    document.getElementById('bTable').style.display = 'none';
+    return;
+  }
+  document.getElementById('bEmpty').style.display = 'none';
+  document.getElementById('bTable').style.display = 'table';
+
+  filtered.forEach((s, i) => {
+    const d   = s.data || {};
+    const st  = statusMap[s.id] || 'new';
+    const rec = fmtDate(s.created_at);
+    const wa  = phone2wa(d.phone);
+    const tr  = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="color:#555;font-size:.77rem">${i+1}</td>
+      <td class="name-cell">${esc(d.name||'—')}</td>
+      <td class="phone-cell"><a href="${wa}" target="_blank"><i class="fa-brands fa-whatsapp"></i>${esc(d.phone||'—')}</a></td>
+      <td>${esc(d.service||'—')}</td>
+      <td>${esc(d.date||'—')}</td>
+      <td>${esc(d.time||'—')}</td>
+      <td>${esc(d.gender||'—')}</td>
+      <td><span class="badge badge-${st}">${st}</span></td>
+      <td style="font-size:.77rem;color:#555">${rec}</td>
+      <td><div class="action-btns">
+        <button class="act-btn" title="View" onclick="openModal('${s.id}','booking')"><i class="fa-solid fa-eye"></i></button>
+        <button class="act-btn" title="WhatsApp" onclick="window.open('${wa}','_blank')"><i class="fa-brands fa-whatsapp"></i></button>
+      </div></td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+document.getElementById('bSearch').addEventListener('input', renderBookings);
+document.getElementById('bFilters').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('#bFilters .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  bFilter = btn.dataset.status;
+  renderBookings();
+});
+
+// ════════════════════════
+//  ENQUIRIES
+// ════════════════════════
+function renderEnquiries() {
+  setLoading('e', false);
+  const q = document.getElementById('eSearch').value.toLowerCase();
+  const filtered = enquiries.filter(s => {
+    const d = s.data || {};
+    const ok = !q ||
+      (d.name    || '').toLowerCase().includes(q) ||
+      (d.phone   || '').toLowerCase().includes(q) ||
+      (d.topic   || '').toLowerCase().includes(q) ||
+      (d.message || '').toLowerCase().includes(q);
+    const st = statusMap[s.id] || 'new';
+    return ok && (eFilter === 'all' || st === eFilter);
+  });
+
+  const today = new Date().toISOString().split('T')[0];
+  let total = enquiries.length, enew = 0, etoday = 0, ereplied = 0;
+  enquiries.forEach(s => {
+    const st = statusMap[s.id] || 'new';
+    if (st === 'new')     enew++;
+    if (st === 'replied') ereplied++;
+    if ((s.created_at||'').split('T')[0] === today) etoday++;
+  });
+  document.getElementById('eStatTotal').textContent   = total;
+  document.getElementById('eStatNew').textContent     = enew;
+  document.getElementById('eStatToday').textContent   = etoday;
+  document.getElementById('eStatReplied').textContent = ereplied;
+
+  const tbody = document.getElementById('eBody');
+  tbody.innerHTML = '';
+  if (!filtered.length) {
+    document.getElementById('eEmpty').style.display = 'block';
+    document.getElementById('eTable').style.display = 'none';
+    return;
+  }
+  document.getElementById('eEmpty').style.display = 'none';
+  document.getElementById('eTable').style.display = 'table';
+
+  filtered.forEach((s, i) => {
+    const d   = s.data || {};
+    const st  = statusMap[s.id] || 'new';
+    const rec = fmtDate(s.created_at);
+    const wa  = phone2wa(d.phone);
+    const tr  = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="color:#555;font-size:.77rem">${i+1}</td>
+      <td class="name-cell">${esc(d.name||'—')}</td>
+      <td class="phone-cell"><a href="${wa}" target="_blank"><i class="fa-brands fa-whatsapp"></i>${esc(d.phone||'—')}</a></td>
+      <td style="font-size:.82rem;color:#888">${esc(d.email||'—')}</td>
+      <td><span style="font-size:.82rem">${esc(d.topic||'—')}</span></td>
+      <td class="msg-cell" title="${esc(d.message||'')}">${esc(d.message||'—')}</td>
+      <td><span class="badge badge-${st}">${st}</span></td>
+      <td style="font-size:.77rem;color:#555">${rec}</td>
+      <td><div class="action-btns">
+        <button class="act-btn" title="View" onclick="openModal('${s.id}','enquiry')"><i class="fa-solid fa-eye"></i></button>
+        <button class="act-btn" title="WhatsApp" onclick="window.open('${wa}','_blank')"><i class="fa-brands fa-whatsapp"></i></button>
+        ${d.email ? `<button class="act-btn" title="Email" onclick="window.open('mailto:${esc(d.email)}','_blank')"><i class="fa-solid fa-envelope"></i></button>` : ''}
+      </div></td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+document.getElementById('eSearch').addEventListener('input', renderEnquiries);
+document.getElementById('eFilters').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('#eFilters .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  eFilter = btn.dataset.status;
+  renderEnquiries();
+});
+
+// ════════════════════════
+//  MODAL
+// ════════════════════════
+function openModal(id, type) {
+  const pool = type === 'booking' ? bookings : enquiries;
+  const s    = pool.find(x => x.id === id);
+  if (!s) return;
+  currentModal = { id, type };
+
+  const d = s.data || {};
+  // Tag
+  const tag = document.getElementById('modalTag');
+  tag.textContent  = type === 'booking' ? 'Booking' : 'Enquiry';
+  tag.className    = 'modal-type-tag ' + (type === 'booking' ? 'tag-booking' : 'tag-enquiry');
+  // Title
+  document.getElementById('modalTitle').textContent = (d.name || 'Details') + ' – ' + (type === 'booking' ? 'Booking' : 'Enquiry');
+
+  let fields;
+  if (type === 'booking') {
+    fields = [
+      ['Name',     d.name],
+      ['Phone',    d.phone],
+      ['Service',  d.service],
+      ['Date',     d.date],
+      ['Time',     d.time],
+      ['For',      d.gender],
+      ['Submitted',new Date(s.created_at).toLocaleString('en-IN')],
+      ['Notes',    d.message, true],
+    ];
+  } else {
+    fields = [
+      ['Name',     d.name],
+      ['Phone',    d.phone],
+      ['Email',    d.email],
+      ['Topic',    d.topic],
+      ['Submitted',new Date(s.created_at).toLocaleString('en-IN')],
+      ['Message',  d.message, true],
+    ];
+  }
+
+  document.getElementById('modalFields').innerHTML = fields.map(([l, v, full]) =>
+    `<div class="modal-field ${full?'full':''}">
+      <label>${l}</label>
+      <p>${esc(v || '—')}</p>
+    </div>`
+  ).join('');
+
+  // Status options
+  const statusOptions = type === 'booking'
+    ? ['new','confirmed','done','cancelled']
+    : ['new','replied','done'];
+  const sel = document.getElementById('modalStatus');
+  sel.innerHTML = statusOptions.map(o =>
+    `<option value="${o}" ${(statusMap[id]||'new')===o?'selected':''}>${o}</option>`
+  ).join('');
+
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+document.getElementById('modalClose').addEventListener('click',  closeModal);
+document.getElementById('modalOverlay').addEventListener('click', e => { if(e.target===document.getElementById('modalOverlay')) closeModal(); });
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); }
+
+document.getElementById('saveStatus').addEventListener('click', () => {
+  if (!currentModal) return;
+  statusMap[currentModal.id] = document.getElementById('modalStatus').value;
+  saveStatus();
+  closeModal();
+  if (currentModal.type === 'booking') { renderBookings(); }
+  else { renderEnquiries(); }
+  updateBadges();
+  showToast('Status updated');
+});
+
+// ── Refresh ──
+document.getElementById('refreshBtn').addEventListener('click', fetchAll);
+
+// ── Helpers ──
+function setLoading(prefix, on) {
+  document.getElementById(`${prefix}Loading`).style.display   = on ? 'block' : 'none';
+  document.getElementById(`${prefix}TableWrap`).style.display = on ? 'none'  : 'block';
+}
+function fmtDate(iso) {
+  if (!iso) return '—';
+  return new Date(iso).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
+}
+function phone2wa(phone) {
+  if (!phone) return '#';
+  return `https://wa.me/${phone.replace(/\D/g,'')}`;
+}
+function esc(str) {
+  return String(str||'')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function showToast(msg, isErr = false) {
+  const el = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  el.className = 'toast' + (isErr ? ' error' : '');
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>
