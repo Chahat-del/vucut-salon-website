@@ -86,3 +86,36 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 document.querySelector('.nav-logo').addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+// ─── Service Menu + Offers Lightbox ───
+(function () {
+  var lightbox  = document.getElementById('svcLightbox');
+  var lbImg     = document.getElementById('svcLightboxImg');
+  var lbClose   = document.getElementById('svcLightboxClose');
+  if (!lightbox) return;
+
+  // Open on any service or offer image click
+  document.querySelectorAll(
+    '.svc-img-card img, .offer-img-card img, .offer-img-full img'
+  ).forEach(function (img) {
+    img.addEventListener('click', function () {
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+  lbClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function (e) {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+})();
