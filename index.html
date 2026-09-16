@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>vuCut – The Family Salon</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Dancing+Script:wght@600;700&family=Rajdhani:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Dancing+Script:wght@600;700&family=Rajdhani:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <!--
@@ -20,8 +20,8 @@
       var hash = window.location.hash;
       // Netlify Identity puts tokens in the URL hash as key=value pairs
       if (hash && (
-        hash.indexOf('invite_token=')      !== -1 ||
-        hash.indexOf('recovery_token=')    !== -1 ||
+        hash.indexOf('invite_token=')       !== -1 ||
+        hash.indexOf('recovery_token=')     !== -1 ||
         hash.indexOf('confirmation_token=') !== -1
       )) {
         // Forward the entire hash to admin.html so the widget can consume it
@@ -96,10 +96,20 @@
         </div>
       </div>
 
-      <!-- Hero salon image -->
+      <!-- Hero salon card (pure CSS brand showcase) -->
       <div class="hero-image">
         <div class="hero-img-glow"></div>
-        <img src="images/salon-hero.jpg" alt="vuCut Salon" class="hero-photo" onerror="this.style.display='none'" />
+        <div class="hero-brand-card">
+          <div class="hbc-badge"><i class="fa-solid fa-scissors"></i> The Family Salon</div>
+          <h2 class="hbc-logo">vu<span class="accent">C</span>ut</h2>
+          <p class="hbc-tagline">STYLE. CARE. CONFIDENCE.</p>
+          <div class="hbc-pillars">
+            <div class="hbc-pillar"><i class="fa-solid fa-crown"></i> <span>Premium Experience</span></div>
+            <div class="hbc-pillar"><i class="fa-solid fa-users"></i> <span>Family Salon</span></div>
+            <div class="hbc-pillar"><i class="fa-solid fa-star"></i> <span>Trusted Quality</span></div>
+            <div class="hbc-pillar"><i class="fa-solid fa-tag"></i> <span>Best Prices</span></div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -141,22 +151,87 @@
     <div class="offers-header">
       <p class="section-label">EXCLUSIVE SALON DEALS</p>
       <h2 class="section-heading">Offers <span class="accent">Zone</span></h2>
+      <p class="section-sub">Great styles. Amazing savings. Pamper yourself with premium salon services at unbeatable prices.</p>
       <div class="divider-line center"></div>
     </div>
 
-    <!-- ── 1. Generic Offer Banner ── -->
+    <!-- ── 1. Generic Offer Banner (From offer-1.png) ── -->
     <div class="offer-block">
-      <div class="offer-img-full">
-        <img src="images/offer-1.png" alt="vuCut Offer" loading="lazy" />
-      </div>
-      <!-- 50% off banner below first image -->
-      <div class="offer-highlight-banner">
-        <i class="fa-solid fa-tag"></i>
-        <div class="offer-pct-stack">
-          <span class="offer-pct">50% OFF</span>
-          <span class="offer-pct-sub">On all services above ₹999/-</span>
+      
+      <!-- 50% OFF Banner -->
+      <div class="mega-discount-banner">
+        <div class="mdb-glow"></div>
+        <div class="mdb-content">
+          <div class="mdb-tag"><i class="fa-solid fa-scissors"></i> EXCLUSIVE SALON DEALS</div>
+          <div class="mdb-headline">
+            <span class="mdb-pct">50% OFF</span>
+            <span class="mdb-sub">ON ALL SERVICES ABOVE ₹999/-</span>
+          </div>
+          <p class="mdb-desc">Great styles. Amazing savings. Pamper yourself with premium salon services at unbeatable prices.</p>
         </div>
       </div>
+
+      <!-- Keratin & Botox (from offer-1.png) -->
+      <div class="featured-treatments-grid">
+        <!-- Keratin Treatment -->
+        <div class="treatment-offer-card">
+          <div class="card-ribbon ribbon-popular">POPULAR</div>
+          <div class="toc-header">
+            <div class="toc-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <div>
+              <h3 class="toc-title">KERATIN TREATMENT</h3>
+              <p class="toc-desc">Exclusive salon deals on Keratin hair treatment</p>
+            </div>
+          </div>
+          <div class="toc-tiers">
+            <div class="tier-item">
+              <span class="tier-label">SHORT LENGTH</span>
+              <span class="tier-dots"></span>
+              <span class="tier-price">₹2999</span>
+            </div>
+            <div class="tier-item">
+              <span class="tier-label">MID LENGTH</span>
+              <span class="tier-dots"></span>
+              <span class="tier-price">₹3999</span>
+            </div>
+            <div class="tier-item">
+              <span class="tier-label">LONG LENGTH</span>
+              <span class="tier-dots"></span>
+              <span class="tier-price">₹4999</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botox Treatment -->
+        <div class="treatment-offer-card">
+          <div class="card-ribbon ribbon-best">BEST DEAL</div>
+          <div class="toc-header">
+            <div class="toc-icon"><i class="fa-solid fa-flask-vial"></i></div>
+            <div>
+              <h3 class="toc-title">BOTOX TREATMENT</h3>
+              <p class="toc-desc">Exclusive salon deals on Botox hair treatment</p>
+            </div>
+          </div>
+          <div class="toc-tiers">
+            <div class="tier-item">
+              <span class="tier-label">SHORT LENGTH</span>
+              <span class="tier-dots"></span>
+              <span class="tier-price">₹3999</span>
+            </div>
+            <div class="tier-item">
+              <span class="tier-label">MID LENGTH</span>
+              <span class="tier-dots"></span>
+              <span class="tier-price">₹4999</span>
+            </div>
+            <div class="tier-item">
+              <span class="tier-label">LONG LENGTH</span>
+              <span class="tier-dots"></span>
+              <span class="tier-price">₹5999</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- ── 2. Welcome Gentlemen — offers 2 to 7 ── -->
@@ -165,13 +240,179 @@
         <i class="fa-solid fa-scissors"></i>
         <span>Welcome Gentlemen ✂ — Your Style Starts Here</span>
       </div>
-      <div class="offer-img-grid">
-        <div class="offer-img-card"><img src="images/offer-2.png" alt="Gents Offer" loading="lazy" /></div>
-        <div class="offer-img-card"><img src="images/offer-3.png" alt="Gents Offer" loading="lazy" /></div>
-        <div class="offer-img-card"><img src="images/offer-4.png" alt="Gents Offer" loading="lazy" /></div>
-        <div class="offer-img-card"><img src="images/offer-5.png" alt="Gents Offer" loading="lazy" /></div>
-        <div class="offer-img-card"><img src="images/offer-6.png" alt="Gents Offer" loading="lazy" /></div>
-        <div class="offer-img-card"><img src="images/offer-7.png" alt="Gents Offer" loading="lazy" /></div>
+
+      <div class="text-offers-grid">
+
+        <!-- Offer 2 -->
+        <div class="offer-box-card">
+          <div class="obc-top">
+            <span class="obc-cat">GENTS</span>
+            <span class="obc-badge-pill">STYLE CONFIDENCE YOU</span>
+          </div>
+          <h3 class="obc-title">HAIR CUT + HAIR WASH + CONDITIONING</h3>
+          <p class="obc-tagline">COMPLETE GROOMING. EVERY TIME.</p>
+          <div class="obc-price-wrap">
+            <span class="obc-just">just</span>
+            <span class="obc-amount">₹149<span class="obc-slash">/-</span></span>
+          </div>
+          <ul class="obc-items">
+            <li><i class="fa-solid fa-scissors"></i> STYLISH HAIR CUT</li>
+            <li><i class="fa-solid fa-shower"></i> HAIR WASH</li>
+            <li><i class="fa-solid fa-pump-soap"></i> CONDITIONING (SOFT &amp; SMOOTH HAIR)</li>
+          </ul>
+          <div class="obc-footer">
+            <span><i class="fa-solid fa-heart"></i> LOOK GOOD. FEEL GOOD. EVERY DAY.</span>
+          </div>
+        </div>
+
+        <!-- Offer 3 -->
+        <div class="offer-box-card featured-border">
+          <div class="card-ribbon ribbon-best">BEST VALUE</div>
+          <div class="obc-top">
+            <span class="obc-cat">GENTS</span>
+            <span class="obc-badge-pill">BEST VALUE</span>
+          </div>
+          <h3 class="obc-title">HAIR CUT</h3>
+          <p class="obc-tagline">LOOK SHARP. FEEL CONFIDENT.</p>
+          <div class="obc-price-wrap">
+            <span class="obc-just">Just</span>
+            <span class="obc-amount">₹199<span class="obc-slash">/-</span></span>
+          </div>
+          <ul class="obc-items">
+            <li><i class="fa-solid fa-scissors"></i> HAIR CUT</li>
+            <li><i class="fa-solid fa-shower"></i> HAIR WASH</li>
+            <li><i class="fa-solid fa-pump-soap"></i> CONDITIONING</li>
+            <li><i class="fa-solid fa-wand-magic-sparkles"></i> TRIMMING</li>
+          </ul>
+          <div class="obc-pills">
+            <span>EXPERT STYLISTS (Stylish Looks)</span>
+            <span>PREMIUM CARE (For Hair &amp; Scalp)</span>
+            <span>CLEAN &amp; FRESH (Every Time)</span>
+            <span>SAFE &amp; HYGIENIC (Your Safety, Our Priority)</span>
+          </div>
+          <div class="obc-footer">
+            <span><i class="fa-solid fa-heart"></i> LOOK SHARP. FEEL CONFIDENT.</span>
+          </div>
+        </div>
+
+        <!-- Offer 4 -->
+        <div class="offer-box-card">
+          <div class="card-ribbon ribbon-hot">ALL IN ONE</div>
+          <div class="obc-top">
+            <span class="obc-cat">GENTS</span>
+            <span class="obc-badge-pill">ALL IN ONE</span>
+          </div>
+          <h3 class="obc-title">COMPLETE GROOMING</h3>
+          <p class="obc-tagline">ALL IN ONE. ALL FOR YOU.</p>
+          <div class="obc-price-wrap">
+            <span class="obc-just">Just</span>
+            <span class="obc-amount">₹349<span class="obc-slash">/-</span></span>
+          </div>
+          <ul class="obc-items">
+            <li><i class="fa-solid fa-scissors"></i> HAIR CUT</li>
+            <li><i class="fa-solid fa-shower"></i> HAIR WASH</li>
+            <li><i class="fa-solid fa-pump-soap"></i> CONDITIONING</li>
+            <li><i class="fa-solid fa-wand-magic-sparkles"></i> TRIMMING</li>
+            <li class="highlight-item"><i class="fa-solid fa-star"></i> EITHER HEAD MASSAGE OR DE-TAN</li>
+          </ul>
+          <div class="obc-pills">
+            <span>STYLISH LOOK (Every Time)</span>
+            <span>CLEAN &amp; FRESH (Feel Great)</span>
+            <span>BOOST CONFIDENCE (Look Your Best)</span>
+            <span>RELAX &amp; REFRESH (Mind &amp; Body)</span>
+            <span>EXPERT CARE (Just For You)</span>
+          </div>
+          <div class="obc-footer">
+            <span>CLEAN ★ FRESH ★ CONFIDENT ★ YOU</span>
+          </div>
+        </div>
+
+        <!-- Offer 5 -->
+        <div class="offer-box-card">
+          <div class="obc-top">
+            <span class="obc-cat">GENTS</span>
+            <span class="obc-badge-pill">PREMIUM SERVICE</span>
+          </div>
+          <h3 class="obc-title">HAIR CUT, TRIM &amp; HAIR SPA</h3>
+          <p class="obc-tagline">LOOK GOOD. FEEL CONFIDENT. — Every Time! —</p>
+          <div class="obc-price-wrap">
+            <span class="obc-just">Just</span>
+            <span class="obc-amount">₹799<span class="obc-slash">/-</span></span>
+          </div>
+          <ul class="obc-items">
+            <li><i class="fa-solid fa-scissors"></i> HAIR CUT (Stylish &amp; Perfect)</li>
+            <li><i class="fa-solid fa-wand-magic-sparkles"></i> TRIM (Neat &amp; Sharp)</li>
+            <li><i class="fa-solid fa-spa"></i> HAIR SPA (Deep Nourishment &amp; Relaxation)</li>
+          </ul>
+          <div class="obc-pills">
+            <span>HEALTHY HAIR (Every Time)</span>
+            <span>BOOSTS CONFIDENCE</span>
+            <span>NOURISHES &amp; REPAIRS</span>
+            <span>RELAXING EXPERIENCE</span>
+          </div>
+          <div class="obc-footer">
+            <span>Book Now! Be Your Best! &nbsp;|&nbsp; CLEAN ★ FRESH ★ CONFIDENT ★ YOU</span>
+          </div>
+        </div>
+
+        <!-- Offer 6 -->
+        <div class="offer-box-card">
+          <div class="obc-top">
+            <span class="obc-cat">GENTS</span>
+            <span class="obc-badge-pill">EXPERT STYLISTS</span>
+          </div>
+          <h3 class="obc-title">HAIR CUT, TRIM &amp; COLOUR</h3>
+          <p class="obc-tagline">SMART LOOK. BOLD YOU. — Every Time! —</p>
+          <div class="obc-price-wrap">
+            <span class="obc-just">Just</span>
+            <span class="obc-amount">₹899<span class="obc-slash">/-</span></span>
+          </div>
+          <ul class="obc-items">
+            <li><i class="fa-solid fa-scissors"></i> HAIR CUT (Stylish &amp; Trendy)</li>
+            <li><i class="fa-solid fa-wand-magic-sparkles"></i> TRIM (Neat &amp; Perfect)</li>
+            <li><i class="fa-solid fa-palette"></i> COLOUR (Vibrant &amp; Long Lasting)</li>
+          </ul>
+          <div class="obc-pills">
+            <span>ENHANCES PERSONALITY</span>
+            <span>HEALTHY HAIR</span>
+            <span>BOOSTS CONFIDENCE</span>
+            <span>LONG LASTING COLOUR</span>
+          </div>
+          <div class="obc-footer">
+            <span>Book Now &amp; Be Your Best!</span>
+          </div>
+        </div>
+
+        <!-- Offer 7 -->
+        <div class="offer-box-card featured-border">
+          <div class="card-ribbon ribbon-royal">PREMIUM</div>
+          <div class="obc-top">
+            <span class="obc-cat">GENTS</span>
+            <span class="obc-badge-pill">AMAZING RESULTS</span>
+          </div>
+          <h3 class="obc-title">PREMIUM GROOMING</h3>
+          <p class="obc-tagline">COMPLETE CARE. COMPLETE YOU.</p>
+          <div class="obc-price-wrap">
+            <span class="obc-just">Just</span>
+            <span class="obc-amount">₹1299<span class="obc-slash">/-</span></span>
+          </div>
+          <ul class="obc-items">
+            <li><i class="fa-solid fa-scissors"></i> HAIR CUT (Stylish &amp; Trendy)</li>
+            <li><i class="fa-solid fa-wand-magic-sparkles"></i> TRIM (Neat &amp; Perfect)</li>
+            <li><i class="fa-solid fa-spa"></i> HEAD MASSAGE (Relax &amp; Refresh)</li>
+            <li><i class="fa-solid fa-sun"></i> DE-TAN FACIAL (Instant Glow &amp; Brightening)</li>
+          </ul>
+          <div class="obc-pills">
+            <span>BOOSTS CONFIDENCE (Feel Your Best)</span>
+            <span>DEEP RELAXATION (Mind &amp; Body)</span>
+            <span>INSTANT GLOW (Look Refreshed)</span>
+            <span>HEALTHY HAIR (Strong &amp; Shiny)</span>
+          </div>
+          <div class="obc-footer">
+            <span>STYLISH LOOK ★ FRESH FEEL ★ CONFIDENT YOU</span>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -181,23 +422,204 @@
         <i class="fa-solid fa-spa"></i>
         <span>💜 Welcome to Beauty &amp; Care — Exclusive Women's Offers Inside</span>
       </div>
-      <div class="offer-img-grid">
-        <div class="offer-img-card"><img src="images/offer-8.png"  alt="Ladies Offer" loading="lazy" /></div>
-        <div class="offer-img-card"><img src="images/offer-9.png"  alt="Ladies Offer" loading="lazy" /></div>
-        <div class="offer-img-card"><img src="images/offer-10.png" alt="Ladies Offer" loading="lazy" /></div>
-        <div class="offer-img-card"><img src="images/offer-11.png" alt="Ladies Offer" loading="lazy" /></div>
-        <div class="offer-img-card"><img src="images/offer-12.png" alt="Ladies Offer" loading="lazy" /></div>
-        <div class="offer-img-card"><img src="images/offer-13.png" alt="Ladies Offer" loading="lazy" /></div>
-        <div class="offer-img-card"><img src="images/offer-14.png" alt="Ladies Offer" loading="lazy" /></div>
-        <div class="offer-img-card"><img src="images/offer-15.png" alt="Ladies Offer" loading="lazy" /></div>
-        <div class="offer-img-card"><img src="images/offer-16.png" alt="Ladies Offer" loading="lazy" /></div>
+
+      <div class="text-offers-grid">
+
+        <!-- Offer 8 -->
+        <div class="offer-box-card brow-card">
+          <div class="card-ribbon ribbon-hot">HOT DEAL</div>
+          <div class="obc-top">
+            <span class="obc-cat">WOMEN'S</span>
+            <span class="obc-badge-pill">SPECIAL</span>
+          </div>
+          <h3 class="obc-title">EYE BROWS</h3>
+          <p class="obc-tagline">Beautiful look ki start 👉 Perfect Brows 💫 @ vuCut 💜</p>
+          <div class="obc-price-wrap">
+            <span class="obc-just">just</span>
+            <span class="obc-amount gold-glow">₹9<span class="obc-slash">/-</span></span>
+            <span class="obc-sub-label">(just 9 Rs)</span>
+          </div>
+          <div class="obc-footer">
+            <span><i class="fa-solid fa-heart"></i> Perfect Brows at vuCut</span>
+          </div>
+        </div>
+
+        <!-- Offer 9 -->
+        <div class="offer-box-card">
+          <div class="obc-top">
+            <span class="obc-cat">WOMEN'S</span>
+            <span class="obc-badge-pill">HAIR CARE</span>
+          </div>
+          <h3 class="obc-title">BASIC HAIR CUT</h3>
+          <p class="obc-tagline">INCLUDING HAIR WASH &amp; CONDITIONING</p>
+          <div class="obc-price-wrap">
+            <span class="obc-just">just</span>
+            <span class="obc-amount">₹499<span class="obc-slash">/-</span></span>
+          </div>
+          <ul class="obc-items">
+            <li><i class="fa-solid fa-scissors"></i> BASIC HAIR CUT</li>
+            <li><i class="fa-solid fa-shower"></i> HAIR WASH</li>
+            <li><i class="fa-solid fa-pump-soap"></i> CONDITIONING</li>
+          </ul>
+        </div>
+
+        <!-- Offer 10 -->
+        <div class="offer-box-card featured-border">
+          <div class="card-ribbon ribbon-popular">POPULAR</div>
+          <div class="obc-top">
+            <span class="obc-cat">WOMEN'S</span>
+            <span class="obc-badge-pill">ADVANCED</span>
+          </div>
+          <h3 class="obc-title">ADVANCED HAIR CUT</h3>
+          <p class="obc-tagline">INCLUDING HAIR WASH &amp; CONDITIONING</p>
+          <div class="obc-price-wrap">
+            <span class="obc-just">just</span>
+            <span class="obc-amount">₹699<span class="obc-slash">/-</span></span>
+          </div>
+          <ul class="obc-items">
+            <li><i class="fa-solid fa-scissors"></i> ADVANCED HAIR CUT</li>
+            <li><i class="fa-solid fa-shower"></i> HAIR WASH</li>
+            <li><i class="fa-solid fa-pump-soap"></i> CONDITIONING</li>
+          </ul>
+        </div>
+
+        <!-- Offer 11 -->
+        <div class="offer-box-card">
+          <div class="obc-top">
+            <span class="obc-cat">WOMEN'S</span>
+            <span class="obc-badge-pill">PACKAGE</span>
+          </div>
+          <h3 class="obc-title">BASIC HAIR CUT</h3>
+          <p class="obc-tagline">PACKAGE INCLUDES HAIR WASH &amp; HEAD MASSAGE</p>
+          <div class="obc-price-wrap">
+            <span class="obc-just">just</span>
+            <span class="obc-amount">₹699<span class="obc-slash">/-</span></span>
+          </div>
+          <ul class="obc-items">
+            <li><i class="fa-solid fa-scissors"></i> BASIC HAIR CUT</li>
+            <li><i class="fa-solid fa-shower"></i> HAIR WASH</li>
+            <li><i class="fa-solid fa-spa"></i> HEAD MASSAGE</li>
+          </ul>
+        </div>
+
+        <!-- Offer 12 -->
+        <div class="offer-box-card">
+          <div class="obc-top">
+            <span class="obc-cat">WOMEN'S</span>
+            <span class="obc-badge-pill">PACKAGE</span>
+          </div>
+          <h3 class="obc-title">ADVANCED HAIR CUT</h3>
+          <p class="obc-tagline">PACKAGE INCLUDES HAIR WASH &amp; HEAD MASSAGE</p>
+          <div class="obc-price-wrap">
+            <span class="obc-just">just</span>
+            <span class="obc-amount">₹899<span class="obc-slash">/-</span></span>
+          </div>
+          <ul class="obc-items">
+            <li><i class="fa-solid fa-scissors"></i> ADVANCED HAIR CUT</li>
+            <li><i class="fa-solid fa-shower"></i> HAIR WASH</li>
+            <li><i class="fa-solid fa-spa"></i> HEAD MASSAGE</li>
+          </ul>
+        </div>
+
+        <!-- Offer 14 -->
+        <div class="offer-box-card">
+          <div class="obc-top">
+            <span class="obc-cat">WOMEN'S</span>
+            <span class="obc-badge-pill">SPA COMBO</span>
+          </div>
+          <h3 class="obc-title">BASIC HAIR CUT + HAIR SPA</h3>
+          <p class="obc-tagline">Pamper your hair, love yourself ♡</p>
+          <div class="obc-price-wrap">
+            <span class="obc-just">JUST</span>
+            <span class="obc-amount">₹1299<span class="obc-slash">/-</span></span>
+          </div>
+          <ul class="obc-items">
+            <li><i class="fa-solid fa-scissors"></i> BASIC HAIR CUT</li>
+            <li><i class="fa-solid fa-spa"></i> HAIR SPA</li>
+          </ul>
+          <div class="obc-pills">
+            <span>HEALTHY HAIR</span>
+            <span>RELAXING SPA</span>
+            <span>EXPERT CARE</span>
+          </div>
+        </div>
+
+        <!-- Offer 13 -->
+        <div class="offer-box-card featured-border">
+          <div class="card-ribbon ribbon-royal">LUXURY</div>
+          <div class="obc-top">
+            <span class="obc-cat">WOMEN'S</span>
+            <span class="obc-badge-pill">PACKAGE</span>
+          </div>
+          <h3 class="obc-title">ADVANCED HAIR CUT &amp; HAIR SPA</h3>
+          <p class="obc-tagline">PACKAGE INCLUDES</p>
+          <div class="obc-price-wrap">
+            <span class="obc-just">just</span>
+            <span class="obc-amount">₹1499<span class="obc-slash">/-</span></span>
+          </div>
+          <ul class="obc-items">
+            <li><i class="fa-solid fa-scissors"></i> ADVANCED HAIR CUT</li>
+            <li><i class="fa-solid fa-spa"></i> HAIR SPA (Deep Nourishment &amp; Scalp Care)</li>
+          </ul>
+        </div>
+
+        <!-- Offer 15 -->
+        <div class="offer-box-card">
+          <div class="card-ribbon ribbon-hot">SPECIAL</div>
+          <div class="obc-top">
+            <span class="obc-cat">WOMEN'S</span>
+            <span class="obc-badge-pill">WAXING</span>
+          </div>
+          <h3 class="obc-title">UNDER ARMS WAX</h3>
+          <p class="obc-tagline">SMOOTH • CLEAN • CONFIDENT</p>
+          <div class="obc-price-wrap">
+            <span class="obc-old-price">₹150/-</span>
+            <span class="obc-just">CROSSED NOW just</span>
+            <span class="obc-amount">₹99<span class="obc-slash">/-</span></span>
+          </div>
+          <ul class="obc-items">
+            <li><i class="fa-solid fa-check"></i> GENTLE WAX FOR SENSITIVE SKIN</li>
+            <li><i class="fa-solid fa-check"></i> SMOOTH &amp; SOFT SKIN</li>
+            <li><i class="fa-solid fa-check"></i> HYGIENIC &amp; SAFE</li>
+            <li><i class="fa-solid fa-check"></i> QUICK &amp; EFFECTIVE</li>
+          </ul>
+          <div class="obc-footer">
+            <span>Smooth today, Confident always! ♡</span>
+          </div>
+        </div>
+
+        <!-- Offer 16 -->
+        <div class="offer-box-card featured-border">
+          <div class="card-ribbon ribbon-best">SPECIAL</div>
+          <div class="obc-top">
+            <span class="obc-cat">WOMEN'S</span>
+            <span class="obc-badge-pill">WAXING</span>
+          </div>
+          <h3 class="obc-title">WOMEN'S FULL BODY WAX</h3>
+          <p class="obc-tagline">Smooth • Soft • Confident</p>
+          <div class="obc-price-wrap">
+            <span class="obc-old-price">₹2000/-</span>
+            <span class="obc-just">now just</span>
+            <span class="obc-amount">₹1399<span class="obc-slash">/-</span></span>
+          </div>
+          <ul class="obc-items">
+            <li><i class="fa-solid fa-check"></i> SMOOTH SKIN</li>
+            <li><i class="fa-solid fa-check"></i> PAIN EFFICIENCY</li>
+            <li><i class="fa-solid fa-check"></i> PREMIUM WAX</li>
+            <li><i class="fa-solid fa-check"></i> HYGIENIC &amp; SAFE</li>
+          </ul>
+          <div class="obc-footer">
+            <span>GLOW EVERYDAY! ♡</span>
+          </div>
+        </div>
+
       </div>
     </div>
 
   </section>
 
   <!-- ═══════════════════════════════════════════
-       SECTION 3 — SERVICE MENU
+       SECTION 3 — SERVICE MENU (CONVERTED FROM IMAGES)
   ═══════════════════════════════════════════ -->
   <section id="services" class="section services-section">
 
@@ -208,71 +630,308 @@
       <div class="divider-line center"></div>
     </div>
 
-    <!-- Service Menu Image Gallery -->
-    <div class="svc-img-grid">
-
-      <div class="svc-img-card">
-        <img src="images/service1_files/1b76ddf1ae5c729307f1a3b2d617e9cb.png" alt="vuCut Service Menu" loading="lazy" />
+    <!-- Interactive Filter & Search Controls -->
+    <div class="menu-controls-wrap">
+      <!-- Search Input -->
+      <div class="menu-search-bar">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="menuSearchInput" placeholder="Search service name (e.g. Keratin, Facial, Beard, Wax, Mehandi)..." />
+        <button id="clearMenuSearch" style="display:none;" aria-label="Clear Search"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
-      <div class="svc-img-card">
-        <img src="images/service1_files/125029729fa180301e5df3dc6e550274.png" alt="vuCut Service Menu" loading="lazy" />
+      <!-- Category Filter Tabs -->
+      <div class="service-category-tabs">
+        <button class="menu-tab-btn active" data-category="all"><i class="fa-solid fa-border-all"></i> All Services</button>
+        <button class="menu-tab-btn" data-category="men"><i class="fa-solid fa-scissors"></i> Men</button>
+        <button class="menu-tab-btn" data-category="women-hair"><i class="fa-solid fa-wand-magic-sparkles"></i> Hair (Women)</button>
+        <button class="menu-tab-btn" data-category="skin"><i class="fa-solid fa-feather"></i> Skin, Waxing &amp; De-Tan</button>
+        <button class="menu-tab-btn" data-category="facials"><i class="fa-solid fa-face-smile-beam"></i> Facials</button>
+        <button class="menu-tab-btn" data-category="spa"><i class="fa-solid fa-spa"></i> Pedicure, Manicure &amp; Spa</button>
+        <button class="menu-tab-btn" data-category="bridal"><i class="fa-solid fa-crown"></i> Make Up &amp; Packages</button>
+      </div>
+    </div>
+
+    <!-- Complete Service Grid -->
+    <div class="services-catalogue-container" id="menuCatalogue">
+
+      <!-- ── 1. MEN: HAIRCUT (from service1_files/125029729fa180301e5df3dc6e550274.png) ── -->
+      <div class="menu-category-card" data-cat="men">
+        <div class="mcc-head">
+          <div class="mcc-icon"><i class="fa-solid fa-scissors"></i></div>
+          <div>
+            <h3 class="mcc-title">Men — Haircut</h3>
+            <p class="mcc-sub">Haircuts, beard styling, shaves &amp; washes</p>
+          </div>
+        </div>
+        <div class="service-items-list">
+          <div class="service-item-row"><span class="si-name">Beard trim</span><span class="si-dots"></span><span class="si-price">100 – 150</span></div>
+          <div class="service-item-row"><span class="si-name">Baby hair cut</span><span class="si-dots"></span><span class="si-price">150</span></div>
+          <div class="service-item-row"><span class="si-name">Haircut</span><span class="si-dots"></span><span class="si-price">250</span></div>
+          <div class="service-item-row"><span class="si-name">Change of Hair Style</span><span class="si-dots"></span><span class="si-price">350</span></div>
+          <div class="service-item-row"><span class="si-name">Shave with Foam</span><span class="si-dots"></span><span class="si-price">100</span></div>
+          <div class="service-item-row"><span class="si-name">Hair Styling + Shampoo</span><span class="si-dots"></span><span class="si-price">200</span></div>
+          <div class="service-item-row"><span class="si-name">Head Shave</span><span class="si-dots"></span><span class="si-price">300</span></div>
+          <div class="service-item-row"><span class="si-name">Shampoo</span><span class="si-dots"></span><span class="si-price">100</span></div>
+          <div class="service-item-row"><span class="si-name">Shampoo &amp; Conditioner</span><span class="si-dots"></span><span class="si-price">200</span></div>
+          <div class="service-item-row"><span class="si-name">Shampoo / Condition / Blow Dry</span><span class="si-dots"></span><span class="si-price">250</span></div>
+        </div>
       </div>
 
-      <div class="svc-img-card">
-        <img src="images/service1_files/207deb916572112b1fcae057de51529c.png" alt="vuCut Service Menu" loading="lazy" />
+      <!-- ── 2. MEN: COLORING & TREATMENTS (from service1_files/125029729fa180301e5df3dc6e550274.png) ── -->
+      <div class="menu-category-card" data-cat="men">
+        <div class="mcc-head">
+          <div class="mcc-icon"><i class="fa-solid fa-spray-can"></i></div>
+          <div>
+            <h3 class="mcc-title">Men — Coloring &amp; Treatments</h3>
+            <p class="mcc-sub">Hair dye, fashion colors, treatments &amp; straightening</p>
+          </div>
+        </div>
+        <div class="service-items-list">
+          <div class="service-item-row"><span class="si-name">Mustache Dye</span><span class="si-dots"></span><span class="si-price">100</span></div>
+          <div class="service-item-row"><span class="si-name">Sidelocks Dye</span><span class="si-dots"></span><span class="si-price">200</span></div>
+          <div class="service-item-row"><span class="si-name">Beard Dye</span><span class="si-dots"></span><span class="si-price">250</span></div>
+          <div class="service-item-row"><span class="si-name">Hair Dye Application</span><span class="si-dots"></span><span class="si-price">400</span></div>
+          <div class="service-item-row"><span class="si-name">Hair Dye (Majireal)</span><span class="si-dots"></span><span class="si-price">600</span></div>
+          <div class="service-item-row"><span class="si-name">Hair Dye (Inoa)</span><span class="si-dots"></span><span class="si-price">800</span></div>
+          <div class="service-item-row"><span class="si-name">Hair Streak (single)</span><span class="si-dots"></span><span class="si-price">300</span></div>
+          <div class="service-item-row"><span class="si-name">Hair Streaking</span><span class="si-dots"></span><span class="si-price">1200 – 1500</span></div>
+          <div class="service-item-row"><span class="si-name">Hair Color - Fashion (Majireal)</span><span class="si-dots"></span><span class="si-price">1000 – 1300</span></div>
+          <div class="service-item-row"><span class="si-name">Hair Color - Fashion (Inoa)</span><span class="si-dots"></span><span class="si-price">1300 – 1600</span></div>
+          <div class="service-item-row"><span class="si-name">Hair Protein treatment</span><span class="si-dots"></span><span class="si-price">800</span></div>
+          <div class="service-item-row"><span class="si-name">Hair Spa treatment</span><span class="si-dots"></span><span class="si-price">800 – 1200</span></div>
+          <div class="service-item-row"><span class="si-name">Anti-Dandruff treatment</span><span class="si-dots"></span><span class="si-price">1000</span></div>
+          <div class="service-item-row"><span class="si-name">Straightening</span><span class="si-dots"></span><span class="si-price">4000 – 6000</span></div>
+          <div class="service-item-row"><span class="si-name">Keratin Treatment</span><span class="si-dots"></span><span class="si-price">4000 – 6000</span></div>
+        </div>
       </div>
 
-      <div class="svc-img-card">
-        <img src="images/service1_files/c0d8922285cb052b14a7f7b2cf03664d.png" alt="vuCut Service Menu" loading="lazy" />
+      <!-- ── 3. WOMEN: HAIRCUT & HAIRSTYLING (from service1_files/c8167be3a19ba9b1f4d55d4e0f3388df.png) ── -->
+      <div class="menu-category-card" data-cat="women-hair">
+        <div class="mcc-head">
+          <div class="mcc-icon"><i class="fa-solid fa-scissors"></i></div>
+          <div>
+            <h3 class="mcc-title">Women — Haircut &amp; Hairstyling</h3>
+            <p class="mcc-sub">Haircuts, blow setting, ironing, tongs &amp; updoes</p>
+          </div>
+        </div>
+        <div class="service-items-list">
+          <div class="service-item-row"><span class="si-name">Baby haircut</span><span class="si-dots"></span><span class="si-price">300</span></div>
+          <div class="service-item-row"><span class="si-name">Baby haircut (styling)</span><span class="si-dots"></span><span class="si-price">400</span></div>
+          <div class="service-item-row"><span class="si-name">Haircut - Fringe</span><span class="si-dots"></span><span class="si-price">200</span></div>
+          <div class="service-item-row"><span class="si-name">Basic haircut</span><span class="si-dots"></span><span class="si-price">300</span></div>
+          <div class="service-item-row"><span class="si-name">Advanced haircut</span><span class="si-dots"></span><span class="si-price">600</span></div>
+          <div class="service-item-row"><span class="si-name">Straight Hair Blow Setting</span><span class="si-dots"></span><span class="si-price">500</span></div>
+          <div class="service-item-row"><span class="si-name">Ultimate Blow Setting</span><span class="si-dots"></span><span class="si-price">700</span></div>
+          <div class="service-item-row"><span class="si-name">Creative Hair Styles</span><span class="si-dots"></span><span class="si-price">800</span></div>
+          <div class="service-item-row"><span class="si-name">Creative Updoes</span><span class="si-dots"></span><span class="si-price">1000</span></div>
+          <div class="service-item-row"><span class="si-name">Ironing (short length)</span><span class="si-dots"></span><span class="si-price">600</span></div>
+          <div class="service-item-row"><span class="si-name">Ironing (mid length)</span><span class="si-dots"></span><span class="si-price">800</span></div>
+          <div class="service-item-row"><span class="si-name">Ironing (long length)</span><span class="si-dots"></span><span class="si-price">1000</span></div>
+          <div class="service-item-row"><span class="si-name">Tongs (short length)</span><span class="si-dots"></span><span class="si-price">600</span></div>
+          <div class="service-item-row"><span class="si-name">Tongs (mid length)</span><span class="si-dots"></span><span class="si-price">800</span></div>
+          <div class="service-item-row"><span class="si-name">Tongs (long length)</span><span class="si-dots"></span><span class="si-price">1000</span></div>
+          <div class="service-item-row"><span class="si-name">Crimping</span><span class="si-dots"></span><span class="si-price">1000</span></div>
+        </div>
       </div>
 
-      <div class="svc-img-card">
-        <img src="images/service1_files/c33fc1c2861e113b7735e57fa144e916.png" alt="vuCut Service Menu" loading="lazy" />
+      <!-- ── 4. WOMEN: HAIRWASH, TREATMENTS & COLORING (from service1_files/c8167be3a19ba9b1f4d55d4e0f3388df.png & sevice3.png) ── -->
+      <div class="menu-category-card" data-cat="women-hair">
+        <div class="mcc-head">
+          <div class="mcc-icon"><i class="fa-solid fa-pump-soap"></i></div>
+          <div>
+            <h3 class="mcc-title">Women — Hair Care &amp; Chemical Treatments</h3>
+            <p class="mcc-sub">Hairwash, hair spa, coloring, straightening &amp; rebonding</p>
+          </div>
+        </div>
+        <div class="service-items-list">
+          <div class="service-item-row"><span class="si-name">Shampoo with Conditioner</span><span class="si-dots"></span><span class="si-price">300</span></div>
+          <div class="service-item-row"><span class="si-name">Shampoo with deep conditioner</span><span class="si-dots"></span><span class="si-price">400</span></div>
+          <div class="service-item-row"><span class="si-name">Split End Removal</span><span class="si-dots"></span><span class="si-price">500</span></div>
+          <div class="service-item-row"><span class="si-name">Hair Spa Short</span><span class="si-dots"></span><span class="si-price">800</span></div>
+          <div class="service-item-row"><span class="si-name">Hair Spa Medium</span><span class="si-dots"></span><span class="si-price">1200</span></div>
+          <div class="service-item-row"><span class="si-name">Hair Spa Long</span><span class="si-dots"></span><span class="si-price">1500</span></div>
+          <div class="service-item-row"><span class="si-name">Hair Colour Root touch up (Majirel)</span><span class="si-dots"></span><span class="si-price">800</span></div>
+          <div class="service-item-row"><span class="si-name">Hair Colour Root touch up (Innova)</span><span class="si-dots"></span><span class="si-price">1000</span></div>
+          <div class="service-item-row"><span class="si-name">Global Colour onwards</span><span class="si-dots"></span><span class="si-price">2000 – 3500</span></div>
+          <div class="service-item-row"><span class="si-name">Global Fashion Colour onwards</span><span class="si-dots"></span><span class="si-price">2000 – 3500</span></div>
+          <div class="service-item-row"><span class="si-name">Full streaking</span><span class="si-dots"></span><span class="si-price">2500 – 3500</span></div>
+          <div class="service-item-row"><span class="si-name">Streaking (Single)</span><span class="si-dots"></span><span class="si-price">250 – 450</span></div>
+          <div class="service-item-row"><span class="si-name">Hair Straightening</span><span class="si-dots"></span><span class="si-price">5000 – 7000</span></div>
+          <div class="service-item-row"><span class="si-name">Rebonding</span><span class="si-dots"></span><span class="si-price">7000 – 11000</span></div>
+          <div class="service-item-row"><span class="si-name">Keratin</span><span class="si-dots"></span><span class="si-price">6000 – 8000</span></div>
+        </div>
       </div>
 
-      <div class="svc-img-card">
-        <img src="images/service1_files/c8167be3a19ba9b1f4d55d4e0f3388df.png" alt="vuCut Service Menu" loading="lazy" />
+      <!-- ── 5. THREADING, WAXING & PIERCING (from service1_files/c0d8922285cb052b14a7f7b2cf03664d.png & sevice3.png) ── -->
+      <div class="menu-category-card" data-cat="skin">
+        <div class="mcc-head">
+          <div class="mcc-icon"><i class="fa-solid fa-feather"></i></div>
+          <div>
+            <h3 class="mcc-title">Threading, Waxing &amp; Piercing</h3>
+            <p class="mcc-sub">Threading, waxing DTAN &amp; piercing (gunshots/studs)</p>
+          </div>
+        </div>
+        <div class="service-items-list">
+          <div class="service-item-row"><span class="si-name">Eyebrows (threading)</span><span class="si-dots"></span><span class="si-price">30</span></div>
+          <div class="service-item-row"><span class="si-name">Upper lip (threading)</span><span class="si-dots"></span><span class="si-price">30</span></div>
+          <div class="service-item-row"><span class="si-name">Fore head (threading)</span><span class="si-dots"></span><span class="si-price">30</span></div>
+          <div class="service-item-row"><span class="si-name">Chin (threading)</span><span class="si-dots"></span><span class="si-price">30</span></div>
+          <div class="service-item-row"><span class="si-name">Side locks (threading)</span><span class="si-dots"></span><span class="si-price">120</span></div>
+          <div class="service-item-row"><span class="si-name">Full face (threading)</span><span class="si-dots"></span><span class="si-price">150</span></div>
+          <div class="service-item-row"><span class="si-name">Upper Lip (waxing DTAN)</span><span class="si-dots"></span><span class="si-price">50</span></div>
+          <div class="service-item-row"><span class="si-name">Chin (waxing DTAN)</span><span class="si-dots"></span><span class="si-price">50</span></div>
+          <div class="service-item-row"><span class="si-name">Sidelocks (waxing DTAN)</span><span class="si-dots"></span><span class="si-price">100</span></div>
+          <div class="service-item-row"><span class="si-name">Under arms (waxing DTAN)</span><span class="si-dots"></span><span class="si-price">150</span></div>
+          <div class="service-item-row"><span class="si-name">Face (waxing DTAN)</span><span class="si-dots"></span><span class="si-price">200</span></div>
+          <div class="service-item-row"><span class="si-name">Half arms (waxing DTAN)</span><span class="si-dots"></span><span class="si-price">300</span></div>
+          <div class="service-item-row"><span class="si-name">Upper back (waxing DTAN)</span><span class="si-dots"></span><span class="si-price">400</span></div>
+          <div class="service-item-row"><span class="si-name">Full arms (waxing DTAN)</span><span class="si-dots"></span><span class="si-price">440</span></div>
+          <div class="service-item-row"><span class="si-name">Half legs (waxing DTAN)</span><span class="si-dots"></span><span class="si-price">440</span></div>
+          <div class="service-item-row"><span class="si-name">Full legs (waxing DTAN)</span><span class="si-dots"></span><span class="si-price">600</span></div>
+          <div class="service-item-row"><span class="si-name">Fullbody (waxing DTAN)</span><span class="si-dots"></span><span class="si-price">2000</span></div>
+          <div class="service-item-row"><span class="si-name">Ear Piercing (gunshots/studs)</span><span class="si-dots"></span><span class="si-price">400</span></div>
+          <div class="service-item-row"><span class="si-name">Nose Piercing (gunshots/studs)</span><span class="si-dots"></span><span class="si-price">300</span></div>
+        </div>
       </div>
 
-      <div class="svc-img-card">
-        <img src="images/service1_files/d0a3f85c13e53154654a4e59ca1f7211.png" alt="vuCut Service Menu" loading="lazy" />
+      <!-- ── 6. DE TAN, CLEAN UPS & PACKS (from service1_files/207deb916572112b1fcae057de51529c.png & service2.png) ── -->
+      <div class="menu-category-card" data-cat="skin">
+        <div class="mcc-head">
+          <div class="mcc-icon"><i class="fa-solid fa-sun"></i></div>
+          <div>
+            <h3 class="mcc-title">De Tan, Clean Ups &amp; Packs</h3>
+            <p class="mcc-sub">De-tan treatments, facial cleanups &amp; mask packs</p>
+          </div>
+        </div>
+        <div class="service-items-list">
+          <div class="service-item-row"><span class="si-name">Face (de tan NORMAL)</span><span class="si-dots"></span><span class="si-price">250</span></div>
+          <div class="service-item-row"><span class="si-name">Face, Neck (de tan NORMAL)</span><span class="si-dots"></span><span class="si-price">400</span></div>
+          <div class="service-item-row"><span class="si-name">Face, Neck, Blouse line (de tan NORMAL)</span><span class="si-dots"></span><span class="si-price">550</span></div>
+          <div class="service-item-row"><span class="si-name">Upper back (de tan NORMAL)</span><span class="si-dots"></span><span class="si-price">300</span></div>
+          <div class="service-item-row"><span class="si-name">Under Arms (de tan NORMAL)</span><span class="si-dots"></span><span class="si-price">150</span></div>
+          <div class="service-item-row"><span class="si-name">Full Arms (de tan NORMAL)</span><span class="si-dots"></span><span class="si-price">550</span></div>
+          <div class="service-item-row"><span class="si-name">Full Legs (de tan NORMAL)</span><span class="si-dots"></span><span class="si-price">800</span></div>
+          <div class="service-item-row"><span class="si-name">Feet (de tan NORMAL)</span><span class="si-dots"></span><span class="si-price">200</span></div>
+          <div class="service-item-row"><span class="si-name">Full back (de tan NORMAL)</span><span class="si-dots"></span><span class="si-price">600</span></div>
+          <div class="service-item-row"><span class="si-name">Full body (de tan NORMAL)</span><span class="si-dots"></span><span class="si-price">2600</span></div>
+          <div class="service-item-row"><span class="si-name">Fruit Cleanup</span><span class="si-dots"></span><span class="si-price">500</span></div>
+          <div class="service-item-row"><span class="si-name">Gold Cleanup(Natures)</span><span class="si-dots"></span><span class="si-price">800</span></div>
+          <div class="service-item-row"><span class="si-name">Gold Cleanup(Shehnaz)</span><span class="si-dots"></span><span class="si-price">900</span></div>
+          <div class="service-item-row"><span class="si-name">Pearl Cleanup</span><span class="si-dots"></span><span class="si-price">800</span></div>
+          <div class="service-item-row"><span class="si-name">Skin Lightining Cleanup</span><span class="si-dots"></span><span class="si-price">1000</span></div>
+          <div class="service-item-row"><span class="si-name">Bio White Lighting Cleanup</span><span class="si-dots"></span><span class="si-price">900</span></div>
+          <div class="service-item-row"><span class="si-name">O3 Seaweed Cleanup</span><span class="si-dots"></span><span class="si-price">1000</span></div>
+          <div class="service-item-row"><span class="si-name">O3 Gold Cleanup</span><span class="si-dots"></span><span class="si-price">1000</span></div>
+          <div class="service-item-row"><span class="si-name">Bio Whitening Mask</span><span class="si-dots"></span><span class="si-price">500</span></div>
+          <div class="service-item-row"><span class="si-name">Skin Lighting Mask</span><span class="si-dots"></span><span class="si-price">500</span></div>
+          <div class="service-item-row"><span class="si-name">Thermo Mask</span><span class="si-dots"></span><span class="si-price">500</span></div>
+          <div class="service-item-row"><span class="si-name">Collogen Mask</span><span class="si-dots"></span><span class="si-price">500</span></div>
+          <div class="service-item-row"><span class="si-name">De Pigmentation Mask</span><span class="si-dots"></span><span class="si-price">500</span></div>
+          <div class="service-item-row"><span class="si-name">Sebum Controlling Mask</span><span class="si-dots"></span><span class="si-price">500</span></div>
+        </div>
       </div>
 
-      <div class="svc-img-card">
-        <img src="images/service1_files/d30934c4bbfefe3ae16e3ef75bd11e18.png" alt="vuCut Service Menu" loading="lazy" />
+      <!-- ── 7. FACIALS (from service1_files/c33fc1c2861e113b7735e57fa144e916.png & service4.png) ── -->
+      <div class="menu-category-card" data-cat="facials">
+        <div class="mcc-head">
+          <div class="mcc-icon"><i class="fa-solid fa-face-smile-beam"></i></div>
+          <div>
+            <h3 class="mcc-title">Facials &amp; Skin Care</h3>
+            <p class="mcc-sub">Basic, active, advance &amp; natural (chemical free) facials</p>
+          </div>
+        </div>
+        <div class="service-items-list">
+          <div class="service-item-row"><span class="si-name">Regular Facial / Mixed Fruit Facial</span><span class="si-dots"></span><span class="si-price">700</span></div>
+          <div class="service-item-row"><span class="si-name">Fruit Facial / Papaya / Banana Facial</span><span class="si-dots"></span><span class="si-price">800</span></div>
+          <div class="service-item-row"><span class="si-name">Tan Facial</span><span class="si-dots"></span><span class="si-price">1000</span></div>
+          <div class="service-item-row"><span class="si-name">Whitening Facial</span><span class="si-dots"></span><span class="si-price">1000</span></div>
+          <div class="service-item-row"><span class="si-name">Anti aging Facial</span><span class="si-dots"></span><span class="si-price">900</span></div>
+          <div class="service-item-row"><span class="si-name">Pearl Facial</span><span class="si-dots"></span><span class="si-price">1000</span></div>
+          <div class="service-item-row"><span class="si-name">Silver Facial</span><span class="si-dots"></span><span class="si-price">1000</span></div>
+          <div class="service-item-row"><span class="si-name">Chocolate Facial</span><span class="si-dots"></span><span class="si-price">900</span></div>
+          <div class="service-item-row"><span class="si-name">Gold Facial / Gold Facial (Natures)</span><span class="si-dots"></span><span class="si-price">1200</span></div>
+          <div class="service-item-row"><span class="si-name">Diamond Facial</span><span class="si-dots"></span><span class="si-price">1200 / 2000</span></div>
+          <div class="service-item-row"><span class="si-name">Skin Lightening Facial</span><span class="si-dots"></span><span class="si-price">1500 / 2500</span></div>
+          <div class="service-item-row"><span class="si-name">Bio Whitening Facial</span><span class="si-dots"></span><span class="si-price">2000</span></div>
+          <div class="service-item-row"><span class="si-name">Diamond Facial(Shehnaz)</span><span class="si-dots"></span><span class="si-price">2500</span></div>
+          <div class="service-item-row"><span class="si-name">Gold Facial(Shehnaz)</span><span class="si-dots"></span><span class="si-price">2000</span></div>
+          <div class="service-item-row"><span class="si-name">O3 Facial</span><span class="si-dots"></span><span class="si-price">3000</span></div>
+          <div class="service-item-row"><span class="si-name">O3 Gold Facial</span><span class="si-dots"></span><span class="si-price">2000</span></div>
+          <div class="service-item-row"><span class="si-name">O3 Seaweed Facial</span><span class="si-dots"></span><span class="si-price">2000</span></div>
+          <div class="service-item-row"><span class="si-name">O3 Intensive Hydrating Facial</span><span class="si-dots"></span><span class="si-price">1700</span></div>
+          <div class="service-item-row"><span class="si-name">O3 Skin Lightning Advance Facial</span><span class="si-dots"></span><span class="si-price">2000 / 2500</span></div>
+          <div class="service-item-row"><span class="si-name">Fruit Punch (natural chemical free)</span><span class="si-dots"></span><span class="si-price">2500</span></div>
+          <div class="service-item-row"><span class="si-name">Lightening Facial (ACME) (chemical free)</span><span class="si-dots"></span><span class="si-price">2000</span></div>
+          <div class="service-item-row"><span class="si-name">Anti-aging Facial (chemical free)</span><span class="si-dots"></span><span class="si-price">2000</span></div>
+          <div class="service-item-row"><span class="si-name">Oats &amp; Milk Fruit Face Pack</span><span class="si-dots"></span><span class="si-price">1000</span></div>
+          <div class="service-item-row"><span class="si-name">Skin Miracle Facial (chemical free)</span><span class="si-dots"></span><span class="si-price">3000</span></div>
+        </div>
       </div>
 
-      <div class="svc-img-card">
-        <img src="images/service2.png" alt="vuCut Service Menu" loading="lazy" />
+      <!-- ── 8. PEDICURE, MANICURE & SPA (from service1_files/d30934c4bbfefe3ae16e3ef75bd11e18.png & service5.png) ── -->
+      <div class="menu-category-card" data-cat="spa">
+        <div class="mcc-head">
+          <div class="mcc-icon"><i class="fa-solid fa-spa"></i></div>
+          <div>
+            <h3 class="mcc-title">Pedicure, Manicure &amp; Spa</h3>
+            <p class="mcc-sub">Nail care, head massages, body polishing &amp; steam</p>
+          </div>
+        </div>
+        <div class="service-items-list">
+          <div class="service-item-row"><span class="si-name">Regular (Pedicure / Manicure)</span><span class="si-dots"></span><span class="si-price">450 / 400</span></div>
+          <div class="service-item-row"><span class="si-name">Spa (Pedicure / Manicure)</span><span class="si-dots"></span><span class="si-price">600 / 500</span></div>
+          <div class="service-item-row"><span class="si-name">Chocolate (Pedicure / Manicure)</span><span class="si-dots"></span><span class="si-price">700 / 600</span></div>
+          <div class="service-item-row"><span class="si-name">Crystal (Pedicure / Manicure)</span><span class="si-dots"></span><span class="si-price">900 / 800-900</span></div>
+          <div class="service-item-row"><span class="si-name">Bomb (Pedicure / Manicure)</span><span class="si-dots"></span><span class="si-price">1300 / 1200</span></div>
+          <div class="service-item-row"><span class="si-name">Head Massage (Coconut Oil)</span><span class="si-dots"></span><span class="si-price">300 – 400</span></div>
+          <div class="service-item-row"><span class="si-name">Head Massage (Almond Oil)</span><span class="si-dots"></span><span class="si-price">400 – 500</span></div>
+          <div class="service-item-row"><span class="si-name">Head Massage (Mint Oil)</span><span class="si-dots"></span><span class="si-price">500</span></div>
+          <div class="service-item-row"><span class="si-name">Head Massage (Dandruff Oil)</span><span class="si-dots"></span><span class="si-price">500 – 600</span></div>
+          <div class="service-item-row"><span class="si-name">Head Massage (Olive Oil)</span><span class="si-dots"></span><span class="si-price">450</span></div>
+          <div class="service-item-row"><span class="si-name">Body Polishing</span><span class="si-dots"></span><span class="si-price">5000 – 9500</span></div>
+          <div class="service-item-row"><span class="si-name">* Body steam with bath (charges separate cost)</span><span class="si-dots"></span><span class="si-price">Rs.500 /-</span></div>
+        </div>
       </div>
 
-      <div class="svc-img-card">
-        <img src="images/sevice3.png" alt="vuCut Service Menu" loading="lazy" />
+      <!-- ── 9. BRIDAL & WEDDING PACKAGES (from service1_files/d0a3f85c13e53154654a4e59ca1f7211.png & service7.png) ── -->
+      <div class="menu-category-card" data-cat="bridal">
+        <div class="mcc-head">
+          <div class="mcc-icon"><i class="fa-solid fa-crown"></i></div>
+          <div>
+            <h3 class="mcc-title">Wedding Packages, Bridal &amp; Mehandi</h3>
+            <p class="mcc-sub">Wedding packages, bridal makeup &amp; mehandi services</p>
+          </div>
+        </div>
+        <div class="service-items-list">
+          <div class="service-item-row highlight-row"><span class="si-name"><strong>REGULAR (wedding packages)</strong><br /><small>DTAN (FACE, NECK, BLOUSE LINE), PEDICURE, MANICURE, FACIAL, HAIRCUT, HAIRSPA, HAIRWASH, BLOWDRY SET</small></span><span class="si-dots"></span><span class="si-price">6000</span></div>
+          <div class="service-item-row highlight-row"><span class="si-name"><strong>ADVANCED (wedding packages)</strong><br /><small>DTAN (FACE, NECK, BACK), PEDICURE, MANICURE, HAIRCUT, HAIRSPA, ADVANCED FACIAL, FULL ARMS WAXING, FULL LEGS WAXING, UNDER ARMS WAXING, EYEBROWS, UPPERLIP WAXING, BODY WAX</small></span><span class="si-dots"></span><span class="si-price">10,000</span></div>
+          <div class="service-item-row"><span class="si-name">Saree draping</span><span class="si-dots"></span><span class="si-price">700</span></div>
+          <div class="service-item-row"><span class="si-name">Hair Style (bridal)</span><span class="si-dots"></span><span class="si-price">800</span></div>
+          <div class="service-item-row"><span class="si-name">Eye Makeup</span><span class="si-dots"></span><span class="si-price">1500</span></div>
+          <div class="service-item-row"><span class="si-name">Party (or) Light</span><span class="si-dots"></span><span class="si-price">3000</span></div>
+          <div class="service-item-row"><span class="si-name">kryolan Make UP</span><span class="si-dots"></span><span class="si-price">10,000</span></div>
+          <div class="service-item-row"><span class="si-name">Mac</span><span class="si-dots"></span><span class="si-price">15,000</span></div>
+          <div class="service-item-row"><span class="si-name">H.D. Makeup</span><span class="si-dots"></span><span class="si-price">20,000</span></div>
+          <div class="service-item-row"><span class="si-name">Arabic Mehandi (Hand Only)</span><span class="si-dots"></span><span class="si-price">500</span></div>
+          <div class="service-item-row"><span class="si-name">Bride Mehandi (Both legs)</span><span class="si-dots"></span><span class="si-price">1500</span></div>
+          <div class="service-item-row"><span class="si-name">Bride Mehandi (Hand Only)</span><span class="si-dots"></span><span class="si-price">3000</span></div>
+          <div class="service-item-row"><span class="si-name">Bride Mehandi (Full hand &amp; legs)</span><span class="si-dots"></span><span class="si-price">4500</span></div>
+        </div>
       </div>
 
-      <div class="svc-img-card">
-        <img src="images/service4.png" alt="vuCut Service Menu" loading="lazy" />
-      </div>
+    </div>
 
-      <div class="svc-img-card">
-        <img src="images/service5.png" alt="vuCut Service Menu" loading="lazy" />
-      </div>
-
-      <div class="svc-img-card">
-        <img src="images/service6.png" alt="vuCut Service Menu" loading="lazy" />
-      </div>
-
-      <div class="svc-img-card">
-        <img src="images/service7.png" alt="vuCut Service Menu" loading="lazy" />
-      </div>
-
+    <!-- No matching results -->
+    <div class="menu-no-results" id="menuNoResults" style="display:none;">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <h3>No matching services found</h3>
+      <p>Try searching for a different service name or select a category tab above.</p>
     </div>
 
     <!-- CTA -->
     <div class="services-cta">
       <p>Ready to transform your look?</p>
-      <a href="#booking" class="cta-btn">Book Your Appointment</a>
+      <a href="#enquiry" class="cta-btn">Send an Enquiry</a>
     </div>
 
   </section>
@@ -289,17 +948,14 @@
       <div class="divider-line center"></div>
     </div>
 
-    <!-- QR Code Block -->
+    <!-- Social / QR Connect Cards -->
     <div class="qr-block">
 
-      <!-- Instagram QR -->
+      <!-- Instagram Link -->
       <a href="https://www.instagram.com/vucut_salon?igsh=OHRvaWpmbnBhNjV5" target="_blank" class="qr-card qr-instagram">
         <div class="qr-border-wrap insta-border">
-          <div class="qr-img-wrap">
-            <img
-              src="images/qr-instagram.png"
-              alt="Instagram QR Code – @vucut_salon"
-            />
+          <div class="qr-icon-wrap">
+            <i class="fa-brands fa-instagram"></i>
           </div>
         </div>
         <div class="qr-label">
@@ -309,144 +965,25 @@
         </div>
       </a>
 
-      <!-- Location QR -->
+      <!-- Location Link -->
       <a href="https://maps.app.goo.gl/2xwywD2YWMu4MM9r9" target="_blank" class="qr-card qr-location">
         <div class="qr-border-wrap google-border">
-          <div class="qr-img-wrap">
-            <img
-              src="images/qr-location.png"
-              alt="Location QR Code – vuCut Salon"
-            />
+          <div class="qr-icon-wrap">
+            <i class="fa-solid fa-location-dot"></i>
           </div>
         </div>
         <div class="qr-label">
-          <span class="qr-action">SCAN</span>
+          <span class="qr-action">SCAN / CLICK</span>
           <span class="qr-text location-text">FOR LOCATION</span>
+          <span class="qr-handle">vuCut Salon on Maps</span>
         </div>
       </a>
 
     </div>
 
-    <!-- ── Booking Form ── -->
-    <div class="booking-section" id="booking">
-      <div class="booking-header">
-        <p class="section-label">BOOK AN APPOINTMENT</p>
-        <h2 class="section-heading">Reserve Your <span class="accent">Slot</span></h2>
-        <div class="divider-line center"></div>
-      </div>
-
-      <!-- success state (hidden by default) -->
-      <div class="form-success" id="formSuccess">
-        <i class="fa-solid fa-circle-check"></i>
-        <h3>Booking Received!</h3>
-        <p>We'll confirm your appointment via WhatsApp / call shortly.</p>
-      </div>
-
-      <form
-        name="booking"
-        method="POST"
-        data-netlify="true"
-        data-netlify-honeypot="bot-field"
-        class="booking-form"
-        id="bookingForm"
-        novalidate
-      >
-        <!-- Netlify hidden fields -->
-        <input type="hidden" name="form-name" value="booking" />
-        <p class="hidden-honey"><label>Don't fill this: <input name="bot-field" /></label></p>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="name">Full Name <span class="req">*</span></label>
-            <input type="text" id="name" name="name" placeholder="Your name" required />
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone Number <span class="req">*</span></label>
-            <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX" required />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="service">Service <span class="req">*</span></label>
-            <select id="service" name="service" required>
-              <option value="" disabled selected>Select a service</option>
-              <optgroup label="── Gents ──">
-                <option>Hair Cut</option>
-                <option>Hair Cut + Wash + Conditioning</option>
-                <option>Beard Trim / Shaping</option>
-                <option>Royal Shave</option>
-              </optgroup>
-              <optgroup label="── Hair Treatments ──">
-                <option>Keratin Treatment</option>
-                <option>Botox Treatment</option>
-                <option>Hair Color / Highlights</option>
-                <option>Balayage</option>
-              </optgroup>
-              <optgroup label="── Ladies ──">
-                <option>Ladies Hair Cut</option>
-                <option>Hair Spa</option>
-                <option>Smoothening</option>
-              </optgroup>
-              <optgroup label="── Beauty &amp; Makeover ──">
-                <option>Facial</option>
-                <option>Cleanup / Bleach</option>
-                <option>Party Makeup</option>
-                <option>Bridal Makeup</option>
-                <option>Manicure / Pedicure</option>
-              </optgroup>
-              <option>Other / Not sure</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="date">Preferred Date <span class="req">*</span></label>
-            <input type="date" id="date" name="date" required />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="time">Preferred Time</label>
-            <select id="time" name="time">
-              <option value="" disabled selected>Select time slot</option>
-              <option>9:00 AM – 10:00 AM</option>
-              <option>10:00 AM – 11:00 AM</option>
-              <option>11:00 AM – 12:00 PM</option>
-              <option>12:00 PM – 1:00 PM</option>
-              <option>2:00 PM – 3:00 PM</option>
-              <option>3:00 PM – 4:00 PM</option>
-              <option>4:00 PM – 5:00 PM</option>
-              <option>5:00 PM – 6:00 PM</option>
-              <option>6:00 PM – 7:00 PM</option>
-              <option>7:00 PM – 8:00 PM</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="gender">For</label>
-            <select id="gender" name="gender">
-              <option value="" disabled selected>Gents / Ladies / Kids</option>
-              <option>Gents</option>
-              <option>Ladies</option>
-              <option>Kids</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group full-width">
-          <label for="message">Additional Notes</label>
-          <textarea id="message" name="message" rows="3" placeholder="Any special requests or questions..."></textarea>
-        </div>
-
-        <button type="submit" class="form-submit">
-          <i class="fa-solid fa-calendar-check"></i>
-          Book Appointment
-        </button>
-      </form>
-    </div>
-
     <!-- ── Enquiry Form ── -->
-    <div class="booking-section enquiry-section" id="enquiry">
-      <div class="booking-header">
+    <div class="enquiry-section" id="enquiry">
+      <div class="enquiry-header">
         <p class="section-label">GOT A QUESTION?</p>
         <h2 class="section-heading">Send an <span class="accent">Enquiry</span></h2>
         <p class="section-sub">We'll get back to you within a few hours</p>
@@ -464,7 +1001,7 @@
         method="POST"
         data-netlify="true"
         data-netlify-honeypot="bot-field-enq"
-        class="booking-form"
+        class="enquiry-form"
         id="enquiryForm"
         novalidate
       >
@@ -490,7 +1027,7 @@
               <option>Service Pricing</option>
               <option>Franchise / Partnership</option>
               <option>Bridal Package</option>
-              <option>Group Booking</option>
+              <option>Group / Event Enquiry</option>
               <option>Products Used</option>
               <option>Working Hours &amp; Location</option>
               <option>Feedback / Complaint</option>
@@ -559,72 +1096,27 @@
     <p class="footer-copy">&copy; 2025 vuCut. All rights reserved.</p>
   </footer>
 
-  <!-- Lightbox for service menu images -->
-  <div class="svc-lightbox" id="svcLightbox">
-    <button class="svc-lightbox-close" id="svcLightboxClose"><i class="fa-solid fa-xmark"></i></button>
-    <img src="" alt="Service Menu" id="svcLightboxImg" />
-  </div>
-
   <script src="script.js"></script>
   <script>
-    // ── Reset forms on every page load/restore (handles bfcache too) ──
+    // ── Reset enquiry form on every page load/restore ──
     function resetForms() {
-      var bookingForm   = document.getElementById('bookingForm');
-      var formSuccess   = document.getElementById('formSuccess');
-      var enquiryForm   = document.getElementById('enquiryForm');
-      var enquirySuccess= document.getElementById('enquirySuccess');
+      var enquiryForm    = document.getElementById('enquiryForm');
+      var enquirySuccess = document.getElementById('enquirySuccess');
 
-      if (bookingForm)    { bookingForm.reset();    bookingForm.style.display    = ''; }
-      if (formSuccess)    { formSuccess.style.display    = 'none'; }
-      if (enquiryForm)    { enquiryForm.reset();    enquiryForm.style.display    = ''; }
+      if (enquiryForm)    { enquiryForm.reset(); enquiryForm.style.display = ''; }
       if (enquirySuccess) { enquirySuccess.style.display = 'none'; }
 
-      // Re-enable submit buttons in case they were disabled
-      document.querySelectorAll('.form-submit').forEach(function(btn) {
-        btn.disabled = false;
-      });
-      // Reset booking submit label
-      var bBtn = bookingForm && bookingForm.querySelector('.form-submit');
-      if (bBtn) bBtn.innerHTML = '<i class="fa-solid fa-calendar-check"></i> Book Appointment';
       var eBtn = enquiryForm && enquiryForm.querySelector('.form-submit');
-      if (eBtn) eBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Enquiry';
+      if (eBtn) {
+        eBtn.disabled = false;
+        eBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Enquiry';
+      }
     }
 
     // Runs on normal load AND when browser restores from bfcache
-    window.addEventListener('pageshow', function(e) {
+    window.addEventListener('pageshow', function() {
       resetForms();
     });
-
-    // ── Booking form — AJAX submit ──
-    var bookingForm = document.getElementById('bookingForm');
-    var formSuccess = document.getElementById('formSuccess');
-
-    if (bookingForm) {
-      var dateInput = document.getElementById('date');
-      if (dateInput) dateInput.min = new Date().toISOString().split('T')[0];
-
-      bookingForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        var btn = bookingForm.querySelector('.form-submit');
-        btn.disabled = true;
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
-        try {
-          var data = new FormData(bookingForm);
-          await fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(data).toString(),
-          });
-          bookingForm.style.display = 'none';
-          formSuccess.style.display = 'flex';
-          formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } catch {
-          btn.disabled = false;
-          btn.innerHTML = '<i class="fa-solid fa-calendar-check"></i> Book Appointment';
-          alert('Something went wrong. Please try again or call us directly.');
-        }
-      });
-    }
 
     // ── Enquiry form — AJAX submit ──
     var enquiryForm    = document.getElementById('enquiryForm');
