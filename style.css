@@ -1793,3 +1793,392 @@ img {
   .footer { padding: 40px 16px 24px; }
   .footer-links { gap: 16px; }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PATCH: Missing CSS rules for all HTML classes
+   Added to fix layout regression after build script mismatch.
+═══════════════════════════════════════════════════════════════ */
+
+/* ─── HERO BRAND CARD (right side of hero) ─── */
+.hero-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 340px;
+}
+
+.hero-img-glow {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(155,31,193,0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-brand-card {
+  position: relative;
+  background: linear-gradient(145deg, var(--bg-card) 0%, rgba(155,31,193,0.08) 100%);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 0 50px rgba(155,31,193,0.15), inset 0 1px 0 rgba(255,255,255,0.05);
+  text-align: center;
+}
+
+.hbc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(155,31,193,0.15);
+  border: 1px solid rgba(155,31,193,0.3);
+  border-radius: 30px;
+  padding: 6px 18px;
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: var(--purple-bright);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.hbc-logo {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.hbc-tagline {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  color: var(--grey);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.hbc-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.hbc-pillar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  color: var(--grey-light);
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.hbc-pillar i {
+  color: var(--purple-bright);
+  font-size: 0.85rem;
+  width: 18px;
+  flex-shrink: 0;
+}
+
+/* ─── OFFER BOX CARDS: MISSING SUB-ELEMENTS ─── */
+.obc-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.obc-pills span {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: var(--purple-bright);
+  background: rgba(155,31,193,0.1);
+  border: 1px solid rgba(155,31,193,0.2);
+  border-radius: 30px;
+  padding: 4px 12px;
+  text-transform: uppercase;
+}
+
+.obc-sub-label {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--grey);
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+  display: block;
+}
+
+.brow-card {
+  /* eye-brow special card — golden accent */
+  border-color: rgba(212,175,55,0.5);
+  background: linear-gradient(145deg, var(--bg-card) 0%, rgba(212,175,55,0.04) 100%);
+}
+
+.brow-card .obc-amount {
+  color: #d4af37;
+  text-shadow: 0 0 20px rgba(212,175,55,0.5);
+}
+
+/* ─── QR / SOCIAL CONNECT CARDS ─── */
+.qr-block {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  padding: 20px 40px 40px;
+}
+
+.qr-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 28px;
+  min-width: 200px;
+  max-width: 240px;
+  text-decoration: none;
+  color: var(--white);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.qr-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(155,31,193,0.2);
+  border-color: var(--purple-bright);
+}
+
+.qr-instagram {
+  border-color: rgba(225,48,108,0.3);
+}
+
+.qr-instagram:hover {
+  border-color: #e1306c;
+  box-shadow: 0 20px 50px rgba(225,48,108,0.2);
+}
+
+.qr-location {
+  border-color: rgba(66,133,244,0.3);
+}
+
+.qr-location:hover {
+  border-color: #4285f4;
+  box-shadow: 0 20px 50px rgba(66,133,244,0.15);
+}
+
+.qr-border-wrap {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid rgba(155,31,193,0.4);
+  position: relative;
+}
+
+.insta-border {
+  border-color: transparent;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  padding: 3px;
+  border-radius: 50%;
+}
+
+.insta-border .qr-icon-wrap {
+  background: var(--bg-card);
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.google-border {
+  border-color: rgba(66,133,244,0.5);
+}
+
+.qr-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4rem;
+}
+
+.qr-instagram .qr-icon-wrap i {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.qr-location .qr-icon-wrap i {
+  color: #4285f4;
+}
+
+.qr-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.qr-action {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  color: var(--grey);
+  text-transform: uppercase;
+}
+
+.insta-text {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-transform: uppercase;
+}
+
+.location-text {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #4285f4;
+  text-transform: uppercase;
+}
+
+.qr-handle {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--grey);
+}
+
+/* ─── ENQUIRY SUBMIT BUTTON ─── */
+.enq-submit {
+  background: linear-gradient(135deg, var(--purple), var(--purple-bright));
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 36px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition);
+  box-shadow: 0 0 25px rgba(155,31,193,0.35);
+  align-self: flex-start;
+}
+
+.enq-submit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 35px rgba(155,31,193,0.5);
+}
+
+.enq-submit:disabled {
+  opacity: 0.6;
+  transform: none;
+  cursor: not-allowed;
+}
+
+/* ─── MENU NO RESULTS ─── */
+.menu-no-results {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--grey);
+}
+
+.menu-no-results i {
+  font-size: 2.5rem;
+  color: var(--border);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.menu-no-results h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  color: var(--grey-light);
+}
+
+.menu-no-results p {
+  font-size: 0.88rem;
+  color: var(--grey);
+}
+
+/* ─── RESPONSIVE PATCHES ─── */
+@media (max-width: 768px) {
+  .hero-brand-card {
+    max-width: 100%;
+    padding: 28px 22px;
+  }
+
+  .hbc-logo { font-size: 2.4rem; }
+
+  .hbc-pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .qr-block {
+    padding: 20px 16px 30px;
+    gap: 16px;
+  }
+
+  .qr-card {
+    min-width: 160px;
+    max-width: 48%;
+    padding: 22px 16px;
+    flex: 1;
+  }
+
+  .qr-border-wrap {
+    width: 70px;
+    height: 70px;
+  }
+
+  .qr-icon-wrap { font-size: 1.8rem; }
+
+  .obc-pills {
+    gap: 5px;
+  }
+
+  .enq-submit {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* qr-text generic label */
+.qr-text { font-family: var(--font-display); font-size: 1rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple-bright); }
